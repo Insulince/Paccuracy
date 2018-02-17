@@ -3,9 +3,13 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {PaccurateRequest, PaccurateResponse} from "../model/model";
 import {API_ENDPOINT, API_KEY} from "../app.constants";
 import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
 
 @Injectable()
 export class PaccurateService {
+  private paccurateResponseSub: Subject<PaccurateResponse> = new Subject<PaccurateResponse>();
+  paccurateResponseObs = this.paccurateResponseSub.asObservable();
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -19,5 +23,9 @@ export class PaccurateService {
           .set("authorization", `apikey ${API_KEY}`)
       }
     );
+  }
+
+  emitPaccurateResponse(response: PaccurateResponse): void {
+    this.paccurateResponseSub.next(response);
   }
 }

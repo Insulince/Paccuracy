@@ -1,7 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {BaseForm} from "../../shared/BaseForm";
-import {PaccurateRequest} from "../../model/model";
+import {PaccurateRequest, PaccurateResponse} from "../../model/model";
+import {PaccurateService} from "../../services/paccurate.service";
 
 @Component({
   selector: "app-paccurate-request-form",
@@ -12,7 +13,8 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fB: FormBuilder) {
+  constructor(private fB: FormBuilder,
+              private paccurateService: PaccurateService) {
     super();
   }
 
@@ -30,7 +32,10 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
 
   submit() {
     const paccurateReq: PaccurateRequest = new PaccurateRequest(this.form.value.itemSets, this.form.value.boxTypes, false);
-    console.log(paccurateReq);
+    this.paccurateService.submitPackingRequest(paccurateReq)
+      .subscribe((response: PaccurateResponse) => {
+        this.paccurateService.emitPaccurateResponse(response);
+      });
   }
 
   private newItemSet(): FormGroup {
