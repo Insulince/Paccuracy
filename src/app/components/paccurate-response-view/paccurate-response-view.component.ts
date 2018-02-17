@@ -46,15 +46,4 @@ export class PaccurateResponseViewComponent implements OnInit {
         );
       });
   }
-
-  // ngAfterViewInit(): void {
-  //   console.log(this.svgs);
-  //   console.log(this.paccurateResponse);
-  //   this.svgs.forEach(
-  //     (svg, i) => {
-  //       svg.nativeElement.style = "transform: translateY(0px); transition: all 0.5s ease-in-out";
-  //       svg.nativeElement.innerHTML = this.paccurateResponse.svgs[i];
-  //     }
-  //   );
-  // }
 }
