@@ -1,10 +1,19 @@
+@import "../variables";
+
 #brand {
   height: 8vh;
-  border-bottom: solid 5px #dddddd;
+  border-bottom: solid 5px $border-color;
+  color: $border-color;
+  background-color: $bg-color;
 }
 
 #form {
-  border-right: solid 5px #dddddd;
+  border-right: solid 5px $border-color;
+  background-color: $bg-color;
+}
+
+#view {
+  background-color: $bg-color;
 }
 
 #form, #view {

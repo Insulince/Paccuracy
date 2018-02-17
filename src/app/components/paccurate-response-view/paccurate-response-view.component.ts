@@ -3,6 +3,8 @@ import {PaccurateResponse} from "../../model/model";
 import {PaccurateService} from "../../services/paccurate.service";
 import "rxjs/add/operator/filter";
 import "rxjs/add/operator/mergeMap";
+import {GrowlService} from "../../services/growl.service";
+import {Message} from "primeng/api";
 
 @Component({
   selector: "app-paccurate-response-view",
@@ -16,7 +18,8 @@ export class PaccurateResponseViewComponent implements OnInit {
 
   @ViewChildren("svgs") svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
 
-  constructor(private paccurateService: PaccurateService) {
+  constructor(private paccurateService: PaccurateService,
+              private growlService: GrowlService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,21 @@ export class PaccurateResponseViewComponent implements OnInit {
       .mergeMap((response: PaccurateResponse) => {
         this.paccurateResponse = response;
         this.loading = false;
+
+        if (response.lenLeftovers === 0) {
+          this.growlService.add({
+            severity: "success",
+            summary: "Success",
+            detail: "Packaging successful!"
+          });
+        } else {
+          this.growlService.add({
+            severity: "error",
+            summary: "Failure",
+            detail: "Packaging failed!"
+          });
+        }
+
         return this.svgs.changes;
       })
       .subscribe(data => {

@@ -1,13 +1,17 @@
 <ng-container *ngIf="!requestSubmitted">
-  <p>No requests submitted yet. Fill out the form to the left!</p>
+  <p id="no-request-text" class="center-align">No requests submitted yet. Fill out the form to the left!</p>
 </ng-container>
 <ng-container *ngIf="requestSubmitted">
   <ng-container *ngIf="loading">
-    <p>Loading...</p>
+    <div class="center-align">
+      <p-progressSpinner id="progress-spinner"></p-progressSpinner>
+    </div>
   </ng-container>
   <ng-container *ngIf="!loading">
-    <ng-container *ngFor="let svg of paccurateResponse?.svgs;">
-      <div #svgs style="transform: translateY(100px)"></div>
-    </ng-container>
+    <div id="svgs-wrapper">
+      <ng-container *ngFor="let svg of paccurateResponse?.svgs;">
+        <div #svgs style="transform: translateY(100px)"></div>
+      </ng-container>
+    </div>
   </ng-container>
 </ng-container>

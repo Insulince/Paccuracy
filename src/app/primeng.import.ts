@@ -1,12 +1,18 @@
 import {NgModule} from "@angular/core";
 import {ColorPickerModule} from "primeng/colorpicker";
+import {ProgressSpinnerModule} from "primeng/primeng";
+import {GrowlModule} from "primeng/growl";
 
 @NgModule({
   imports: [
-    ColorPickerModule
+    ColorPickerModule,
+    ProgressSpinnerModule,
+    GrowlModule
   ],
   exports: [
-    ColorPickerModule
+    ColorPickerModule,
+    ProgressSpinnerModule,
+    GrowlModule
   ]
 })
 export class PrimengImportModule {

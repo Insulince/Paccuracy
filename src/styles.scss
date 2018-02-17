@@ -1,3 +1,7 @@
+* {
+  font-family: Arial, serif;
+}
+
 html, body {
   overflow-x: hidden;
 }
@@ -49,7 +53,7 @@ line.volume-line {
 
 .box-figure {
   width: 100%;
-  padding: 1em;
-  margin: 3em 0 0;
+  padding: 0 0 0 0;
+  margin: 0;
   display: inline-block;
 }

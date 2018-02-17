@@ -6,6 +6,8 @@ export class PaccurateRequest {
   public includeScripts?: boolean;
   public usableSpace?: number;
 
+  public eye: Coordinates  = new Coordinates(1, 1, 2);
+
   public constructor(itemSets: Array<ItemSet>, boxTypes: Array<BoxType>, includeScripts?: boolean, usableSpace?: number) {
     this.itemSets = itemSets;
     this.boxTypes = boxTypes;
