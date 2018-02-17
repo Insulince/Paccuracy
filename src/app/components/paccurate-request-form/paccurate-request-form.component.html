@@ -1,3 +1,85 @@
-<p>
-  paccurate-request-form works!
-</p>
+<div class="container-fluid p-2">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="card p-2 my-2" formArrayName="boxTypes">
+      <div class="card-header">Boxs</div>
+      <div class="card-body">
+        <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
+          <div class="card p-3" [formGroupName]="i">
+            <div class="form-group">
+              <label for="weightMax">Maximum Weight</label>
+              <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
+            </div>
+            <div class="form-group">
+              <label for="boxName">Box Name</label>
+              <input type="text" class="form-control" id="boxName" formControlName="name">
+            </div>
+            <div class="form-row" formGroupName="dimensions">
+              <div class="col-4">
+                <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              </div>
+              <div class="col-4">
+                <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              </div>
+              <div class="col-4">
+                <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              </div>
+            </div>
+            <button class="btn btn-outline-danger btn-sm my-2" type="button" *ngIf="getBoxTypesControls(form).length > 1;"
+                    (click)="removeBoxType(i)">Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary btn-sm" type="button" (click)="addBoxType()">Add</button>
+      </div>
+    </div>
+    <div class="card p-2 my-2" formArrayName="itemSets">
+      <div class="card-header">Items</div>
+      <div class="card-body">
+        <div class="my-3" *ngFor="let itemSet of getItemSetsControls(form); let i = index;">
+          <div class="card p-3" [formGroupName]="i">
+            <div class="form-group">
+              <label for="refId">Ref. ID</label>
+              <input type="number" id="refId" class="form-control" formControlName="refId">
+            </div>
+            <div class="form-group">
+              <label for="color">Color</label>
+              <p-colorPicker formControlName="color" id="color"></p-colorPicker>
+            </div>
+            <div class="form-group">
+              <label for="itemWeight">Weight</label>
+              <input type="number" id="itemWeight" class="form-control" formControlName="weight">
+            </div>
+            <div class="form-row" formGroupName="dimensions">
+              <div class="col-4">
+                <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              </div>
+              <div class="col-4">
+                <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              </div>
+              <div class="col-4">
+                <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" class="form-control" formControlName="quantity">
+            </div>
+            <div class="form-group">
+              <label for="itemName">Name</label>
+              <input type="text" id="itemName" class="form-control" formControlName="name">
+            </div>
+            <button class="btn btn-outline-danger btn-sm my-2" type="button" *ngIf="getItemSetsControls(form).length > 1;"
+                    (click)="removeItemSet(i)">Remove
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add</button>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Pack</button>
+  </form>
+</div>
