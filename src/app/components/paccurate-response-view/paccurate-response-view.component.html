@@ -1,1 +1,38 @@
-<p>asdf</p>
+<p>Paccurate Response</p>
+<div class="margin-left">
+  <p>Boxes:</p>
+  <ng-container *ngFor="let boxWrapper of paccurateResponse.boxes; let i = index;">
+    <div class="margin-left">
+      <p>Box {{i}}</p>
+      <p></p>
+      <ng-container *ngFor="let itemWrapper of boxWrapper.box.items">
+        <div class="margin-left">
+          <p>Color: {{itemWrapper.item.color}}</p>
+          <p>Dimensions: ({{itemWrapper.item.dimensions.x}}, {{itemWrapper.item.dimensions.y}}, {{itemWrapper.item.dimensions.z}})</p>
+          <p>Index: {{itemWrapper.item.index}}</p>
+          <p>Message: {{itemWrapper.item.message}}</p>
+          <p>Name: {{itemWrapper.item.name}}</p>
+          <p>Origin: ({{itemWrapper.item.dimensions.x}}, {{itemWrapper.item.dimensions.y}}, {{itemWrapper.item.dimensions.z}})</p>
+          <p>Ref ID: {{itemWrapper.item.refId}}</p>
+          <p>Weight: {{itemWrapper.item.weight}}</p>
+          <hr/>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <p>Leftovers:</p>
+  <ng-container *ngFor="let leftover of paccurateResponse.leftovers">
+    <div class="margin-left">
+
+    </div>
+  </ng-container>
+  <p>Length Boxes: {{paccurateResponse.lenBoxes}}</p>
+  <p>Length Items: {{paccurateResponse.lenItems}}</p>
+  <p>Length Leftovers: {{paccurateResponse.lenLeftovers}}</p>
+  <p>Svgs:</p>
+  <ng-container *ngFor="let svg of paccurateResponse.svgs">
+    <div class="margin-left">
+      {{svg}}
+    </div>
+  </ng-container>
+</div>
