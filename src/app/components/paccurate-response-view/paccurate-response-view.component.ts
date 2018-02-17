@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from "@angular/core";
 import {PaccurateResponse} from "../../model/model";
 import {PaccurateService} from "../../services/paccurate.service";
 
@@ -8,19 +8,22 @@ import {PaccurateService} from "../../services/paccurate.service";
   styleUrls: ["./paccurate-response-view.component.scss"]
 })
 export class PaccurateResponseViewComponent implements OnInit, AfterViewInit {
-  @Input()
-  paccurateResponse: PaccurateResponse;
+  public paccurateResponse: PaccurateResponse;
+  public loading: boolean;
 
-  @ViewChildren("svgs")
-  svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
+  @ViewChildren("svgs") svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
+
   constructor(private paccurateService: PaccurateService) {
   }
 
   ngOnInit(): void {
-    this.paccurateService.paccurateResponseObs
-      .subscribe((response: PaccurateResponse) => {
+    this.loading = true;
+    this.paccurateService.paccurateResponseObs.subscribe(
+      (response: PaccurateResponse): void => {
         this.paccurateResponse = response;
-      });
+        this.loading = false;
+      }
+    );
   }
 
   ngAfterViewInit(): void {
