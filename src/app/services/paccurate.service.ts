@@ -10,6 +10,9 @@ export class PaccurateService {
   private paccurateResponseSub: Subject<PaccurateResponse> = new Subject<PaccurateResponse>();
   paccurateResponseObs = this.paccurateResponseSub.asObservable();
 
+  private paccurateRequestSubmittedSub: Subject<void> = new Subject<void>();
+  paccurateRequestSubmittedObs = this.paccurateRequestSubmittedSub.asObservable();
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -23,6 +26,10 @@ export class PaccurateService {
           .set("authorization", `apikey ${API_KEY}`)
       }
     );
+  }
+
+  emitPaccurateRequestSubmitted(): void {
+    this.paccurateRequestSubmittedSub.next();
   }
 
   emitPaccurateResponse(response: PaccurateResponse): void {

@@ -1,3 +1,23 @@
+html, body {
+  overflow-x: hidden;
+}
+
 .margin-left {
   margin-left: 25px;
+}
+
+.max-width {
+  width: 100%;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.center-align {
+  text-align: center;
 }

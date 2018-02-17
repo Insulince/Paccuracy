@@ -31,11 +31,13 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
   }
 
   submit() {
-    const paccurateReq: PaccurateRequest = new PaccurateRequest(this.form.value.itemSets, this.form.value.boxTypes, false);
-    this.paccurateService.submitPackingRequest(paccurateReq)
-      .subscribe((response: PaccurateResponse) => {
+    const paccurateReq: PaccurateRequest = new PaccurateRequest(this.form.value.itemSets, this.form.value.boxTypes, true);
+    this.paccurateService.emitPaccurateRequestSubmitted();
+    this.paccurateService.submitPackingRequest(paccurateReq).subscribe(
+      (response: PaccurateResponse) => {
         this.paccurateService.emitPaccurateResponse(response);
-      });
+      }
+    );
   }
 
   private newItemSet(): FormGroup {

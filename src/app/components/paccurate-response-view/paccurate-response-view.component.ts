@@ -3,7 +3,6 @@ import {PaccurateResponse} from "../../model/model";
 import {PaccurateService} from "../../services/paccurate.service";
 import "rxjs/add/operator/filter";
 import "rxjs/add/operator/mergeMap";
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: "app-paccurate-response-view",
@@ -13,6 +12,7 @@ import {Observable} from "rxjs/Observable";
 export class PaccurateResponseViewComponent implements OnInit {
   public paccurateResponse: PaccurateResponse;
   public loading: boolean;
+  public requestSubmitted: boolean;
 
   @ViewChildren("svgs") svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
 
@@ -20,7 +20,15 @@ export class PaccurateResponseViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.requestSubmitted = false;
     this.loading = true;
+
+    this.paccurateService.paccurateRequestSubmittedObs.subscribe(
+      (): void => {
+        this.requestSubmitted = true;
+      }
+    );
+
     this.paccurateService.paccurateResponseObs
       .filter(data => !!data)
       .mergeMap((response: PaccurateResponse) => {
