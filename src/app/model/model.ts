@@ -1,4 +1,6 @@
 export class PaccurateRequest {
+  public readonly key: string = "J6R4eORMcZ2rhrIA0ybLRkDYekWJOTfb_Ix_qOgw4X4";
+
   public itemSets: Array<ItemSet> = [];
   public boxTypes: Array<BoxType> = [];
   public includeScripts: boolean = false;
@@ -91,9 +93,10 @@ export class Box {
   public weightNet: number;
   public weightRemaining: number;
   public weightUsed: number;
+  public weightTare: number;
   public weightUtilization: number;
 
-  public constructor(dimensions: Coordinates, id: number, items: Array<ItemWrapper>, name: string, volumeMax: number, volumeRemaining: number, volumeUsed: number, volumeUtilization: number, weightMax: number, weightNet: number, weightRemaining: number, weightUsed: number, weightUtilization: number) {
+  public constructor(dimensions: Coordinates, id: number, items: Array<ItemWrapper>, name: string, volumeMax: number, volumeRemaining: number, volumeUsed: number, volumeUtilization: number, weightMax: number, weightNet: number, weightRemaining: number, weightUsed: number, weightTare: number, weightUtilization: number) {
     this.dimensions = dimensions;
     this.id = id;
     this.items = items;
@@ -106,6 +109,7 @@ export class Box {
     this.weightNet = weightNet;
     this.weightRemaining = weightRemaining;
     this.weightUsed = weightUsed;
+    this.weightTare = weightTare;
     this.weightUtilization = weightUtilization;
   }
 }
