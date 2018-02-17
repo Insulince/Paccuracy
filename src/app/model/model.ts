@@ -3,12 +3,14 @@ export class PaccurateRequest {
 
   public itemSets: Array<ItemSet> = [];
   public boxTypes: Array<BoxType> = [];
-  public includeScripts: boolean = false;
+  public includeScripts?: boolean;
+  public usableSpace?: number;
 
-  public constructor(itemSets: Array<ItemSet>, boxTypes: Array<BoxType>, includeScripts: boolean) {
+  public constructor(itemSets: Array<ItemSet>, boxTypes: Array<BoxType>, includeScripts?: boolean, usableSpace?: number) {
     this.itemSets = itemSets;
     this.boxTypes = boxTypes;
-    this.includeScripts = includeScripts;
+    this.includeScripts = includeScripts || false;
+    this.usableSpace = usableSpace || 1;
   }
 }
 
@@ -46,11 +48,13 @@ export class BoxType {
   public weightMax: number = 0;
   public name: string;
   public dimensions: Coordinates;
+  public weightTare: number;
 
-  public constructor(weightMax: number, name: string, dimensions: Coordinates) {
+  public constructor(weightMax: number, name: string, dimensions: Coordinates, weightTare: number) {
     this.weightMax = weightMax;
     this.name = name;
     this.dimensions = dimensions;
+    this.weightTare = weightTare;
   }
 }
 
