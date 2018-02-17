@@ -1,7 +1,7 @@
 <div class="container-fluid p-2">
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="card p-2 my-2" formArrayName="boxTypes">
-      <div class="card-header">Boxs</div>
+      <div class="card-header">Boxes</div>
       <div class="card-body">
         <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
           <div class="card p-3" [formGroupName]="i">

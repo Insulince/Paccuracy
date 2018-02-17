@@ -1,6 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {BaseForm} from "../../shared/BaseForm";
+import {PaccurateRequest} from "../../model/model";
 
 @Component({
   selector: "app-paccurate-request-form",
@@ -28,32 +29,33 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value);
+    const paccurateReq: PaccurateRequest = new PaccurateRequest(this.form.value.itemSets, this.form.value.boxTypes, false);
+    console.log(paccurateReq);
   }
 
   private newItemSet(): FormGroup {
     return this.fB.group({
-      refId: [0],
+      refId: [],
       color: [""],
-      weight: [0],
+      weight: [],
       dimensions: this.fB.group({
-        x: [0],
-        y: [0],
-        z: [0]
+        x: [],
+        y: [],
+        z: []
       }),
-      quantity: [0],
-      name: [""]
+      quantity: [],
+      name: []
     });
   }
 
   private newBoxType(): FormGroup {
     return this.fB.group({
-      weightMax: [0],
-      name: [""],
+      weightMax: [],
+      name: [],
       dimensions: this.fB.group({
-        x: [0],
-        y: [0],
-        z: [0]
+        x: [],
+        y: [],
+        z: []
       })
     });
   }
