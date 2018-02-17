@@ -14,4 +14,7 @@
       </ng-container>
     </div>
   </ng-container>
+  <ng-container *ngIf="!loading && paccurateResponse.svgs.length != 0">
+    <app-three-js [paccurateResponse]="paccurateResponse"></app-three-js>
+  </ng-container>
 </ng-container>

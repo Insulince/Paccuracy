@@ -9,12 +9,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {PrimengImportModule} from "./primeng.import";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {GrowlService} from "./services/growl.service";
+import { ThreeJsComponent } from './three-js/three-js.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaccurateRequestFormComponent,
-    PaccurateResponseViewComponent
+    PaccurateResponseViewComponent,
+    ThreeJsComponent
   ],
   imports: [
     BrowserModule,
