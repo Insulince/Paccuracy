@@ -1,38 +1,97 @@
-<p>Paccurate Response</p>
+<p>Paccurate Response:</p>
 <div class="margin-left">
   <p>Boxes:</p>
-  <ng-container *ngFor="let boxWrapper of paccurateResponse.boxes; let i = index;">
+  <div class="margin-left">
+    <ng-container *ngFor="let boxWrapper of paccurateResponse.boxes; let i = index;">
+      <p>Box {{i}}:</p>
+      <p>Dimensions</p>
+      <div class="margin-left">
+        <p>x: {{boxWrapper.box.dimensions.x}}</p>
+        <p>y: {{boxWrapper.box.dimensions.y}}</p>
+        <p>z: {{boxWrapper.box.dimensions.z}}</p>
+      </div>
+      <p>Id: {{boxWrapper.box.id}}</p>
+      <p>Items:</p>
+        <div class="margin-left">
+          <ng-container *ngFor="let itemWrapper of boxWrapper.box.items; let j = index;">
+            <p>Item {{j}}:</p>
+            <div class="margin-left">
+              <p>Color: {{itemWrapper.item.color}}</p>
+              <p>Dimensions:</p>
+              <div class="margin-left">
+                <p>x: {{itemWrapper.item.dimensions.x}}</p>
+                <p>y: {{itemWrapper.item.dimensions.y}}</p>
+                <p>z: {{itemWrapper.item.dimensions.z}}</p>
+              </div>
+              <p>Index: {{itemWrapper.item.index}}</p>
+              <p>Message: {{itemWrapper.item.message}}</p>
+              <p>Name: {{itemWrapper.item.name}}</p>
+              <p>Origin:</p>
+              <div class="margin-left">
+                <p>x: {{itemWrapper.item.origin.x}}</p>
+                <p>y: {{itemWrapper.item.origin.y}}</p>
+                <p>z: {{itemWrapper.item.origin.z}}</p>
+              </div>
+              <p>Ref ID: {{itemWrapper.item.refId}}</p>
+              <p>Weight: {{itemWrapper.item.weight}}</p>
+            </div>
+          </ng-container>
+      </div>
+      <p>Name: {{boxWrapper.box.name}}</p>
+      <p>Max Volume: {{boxWrapper.box.volumeMax}}</p>
+      <p>Remaining Volume: {{boxWrapper.box.volumeRemaining}}</p>
+      <p>Volume Used: {{boxWrapper.box.volumeUsed}}</p>
+      <p>Volume Utilization: {{boxWrapper.box.volumeUtilization * 100}}%</p>
+      <p>Max Weight: {{boxWrapper.box.weightMax}}</p>
+      <p>Net Weight: {{boxWrapper.box.weightNet}}</p>
+      <p>Remaining Weight: {{boxWrapper.box.weightRemaining}}</p>
+      <p>Weight Used: {{boxWrapper.box.weightUsed}}</p>
+      <p>Weight Tare: {{boxWrapper.box.weightTare}}</p>
+      <p>Weight Utilization: {{boxWrapper.box.weightUtilization}}</p>
+    </ng-container>
+  </div>
+  <p>Leftovers:</p>
+  <div class="margin-left">
+    <p>Items:</p>
     <div class="margin-left">
-      <p>Box {{i}}</p>
-      <p></p>
-      <ng-container *ngFor="let itemWrapper of boxWrapper.box.items">
+      <ng-container *ngFor="let itemWrapper of paccurateResponse.leftovers; let i = index;">
+        <p>Item {{i}}:</p>
         <div class="margin-left">
           <p>Color: {{itemWrapper.item.color}}</p>
-          <p>Dimensions: ({{itemWrapper.item.dimensions.x}}, {{itemWrapper.item.dimensions.y}}, {{itemWrapper.item.dimensions.z}})</p>
+          <p>Dimensions:</p>
+          <div class="margin-left">
+            <p>x: {{itemWrapper.item.dimensions.x}}</p>
+            <p>y: {{itemWrapper.item.dimensions.y}}</p>
+            <p>z: {{itemWrapper.item.dimensions.z}}</p>
+          </div>
           <p>Index: {{itemWrapper.item.index}}</p>
           <p>Message: {{itemWrapper.item.message}}</p>
           <p>Name: {{itemWrapper.item.name}}</p>
-          <p>Origin: ({{itemWrapper.item.dimensions.x}}, {{itemWrapper.item.dimensions.y}}, {{itemWrapper.item.dimensions.z}})</p>
+          <p>Origin:</p>
+          <div class="margin-left">
+            <p>x: {{itemWrapper.item.origin.x}}</p>
+            <p>y: {{itemWrapper.item.origin.y}}</p>
+            <p>x: {{itemWrapper.item.origin.z}}</p>
+          </div>
           <p>Ref ID: {{itemWrapper.item.refId}}</p>
           <p>Weight: {{itemWrapper.item.weight}}</p>
           <hr/>
         </div>
       </ng-container>
     </div>
-  </ng-container>
-  <p>Leftovers:</p>
-  <ng-container *ngFor="let leftover of paccurateResponse.leftovers">
-    <div class="margin-left">
-
-    </div>
-  </ng-container>
+  </div>
   <p>Length Boxes: {{paccurateResponse.lenBoxes}}</p>
   <p>Length Items: {{paccurateResponse.lenItems}}</p>
   <p>Length Leftovers: {{paccurateResponse.lenLeftovers}}</p>
   <p>Svgs:</p>
-  <ng-container *ngFor="let svg of paccurateResponse.svgs">
-    <div class="margin-left">
-      {{svg}}
-    </div>
-  </ng-container>
+  <div class="margin-left">
+    <ng-container *ngFor="let svg of paccurateResponse.svgs; let i = index;">
+      <p>Svg {{i}}</p>
+      <div class="margin-left">
+        <div #svgs></div>
+      </div>
+    </ng-container>
+  </div>
+  <p>Scripts: {{paccurateResponse.scripts}}</p>
+  <p>Styles: {{paccurateResponse.styles}}</p>
 </div>

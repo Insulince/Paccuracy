@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
           new Coordinates(
             1,
             5,
-            3
+            300
           ),
           1,
           "item1Name"

@@ -60,15 +60,19 @@ export class PaccurateResponse {
   public lenBoxes: number;
   public lenItems: number;
   public lenLeftovers: number;
-  public svgs: Array<string> = [];
+  public svgs: Array<SVGElement> = [];
+  public scripts: string;
+  public styles: string;
 
-  public constructor(boxes: Array<BoxWrapper>, leftovers: Array<ItemWrapper>, lenBoxes: number, lenItems: number, lenLeftovers: number, svgs: Array<string>) {
+  public constructor(boxes: Array<BoxWrapper>, leftovers: Array<ItemWrapper>, lenBoxes: number, lenItems: number, lenLeftovers: number, svgs: Array<SVGElement>, scripts?: string, styles?: string) {
     this.boxes = boxes;
     this.leftovers = leftovers;
     this.lenBoxes = lenBoxes;
     this.lenItems = lenItems;
     this.lenLeftovers = lenLeftovers;
     this.svgs = svgs;
+    this.scripts = scripts || "";
+    this.styles = styles || "";
   }
 }
 
