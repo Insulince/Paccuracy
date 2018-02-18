@@ -1,3 +1,5 @@
+@import "../../../variables";
+
 .card {
   margin: 0 0 20px 0 !important;
 }
@@ -8,4 +10,9 @@
 
 .request-form {
   margin-top: 20px;
+}
+
+.header-description {
+  float: right;
+  color: $border-color;
 }

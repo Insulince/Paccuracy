@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="request-form">
   <div class="card my-2" formArrayName="boxTypes">
-    <div class="card-header">Boxes</div>
+    <div class="card-header">Boxes<span class="header-description">The things you'll put items into</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="card my-2" formArrayName="itemSets">
-    <div class="card-header">Items</div>
+    <div class="card-header">Items<span class="header-description">The things you'll put in the boxes</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let itemSet of getItemSetsControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
@@ -46,7 +46,7 @@
           <!--<input type="number" id="refId" class="form-control" formControlName="refId">-->
           <!--</div>-->
           <div class="form-group">
-            <label for="itemName">Name</label>
+            <label for="itemName">Item Name</label>
             <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
           <div class="form-group">

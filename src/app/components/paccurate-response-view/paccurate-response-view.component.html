@@ -78,7 +78,7 @@
     <div class="row">
       <div class="col-6 margin-top" *ngFor="let svg of paccurateResponse?.svgs; let i = index;">
         <ng-container>
-          <p class="svg-descriptor">Package {{i + 1}}</p>
+          <p class="svg-descriptor">Package {{i + 1}} ("{{paccurateResponse.boxes[i].box.name}}")</p>
           <div class="svgs-wrapper">
             <div #svgs style="transform: translateY(-200px)"></div>
           </div>
