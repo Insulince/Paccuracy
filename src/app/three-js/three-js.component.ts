@@ -59,7 +59,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
             this.itemGeometries.push(new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y));
             this.itemMaterials.push(new THREE.MeshStandardMaterial({color: itemWrapper.item.color}));
             this.itemCubes.push(new THREE.Mesh(this.itemGeometries[this.itemGeometries.length - 1], this.itemMaterials[this.itemMaterials.length - 1]));
-            this.itemCubes[this.itemCubes.length - 1].position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((itemWrapper.item.origin.z + boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
+            this.itemCubes[this.itemCubes.length - 1].position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
             this.scene.add(this.itemCubes[this.itemCubes.length - 1]);
           }
         );
