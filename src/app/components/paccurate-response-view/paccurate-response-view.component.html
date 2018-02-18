@@ -1,13 +1,84 @@
 <ng-container *ngIf="!requestSubmitted">
-  <p>No requests submitted yet. Fill out the form to the left!</p>
+  <p id="no-request-text" class="center-align">No requests submitted yet. Fill out the form to the left!</p>
 </ng-container>
 <ng-container *ngIf="requestSubmitted">
   <ng-container *ngIf="loading">
-    <p>Loading...</p>
+    <div class="center-align">
+      <p-progressSpinner id="progress-spinner"></p-progressSpinner>
+    </div>
   </ng-container>
   <ng-container *ngIf="!loading">
-    <ng-container *ngFor="let svg of paccurateResponse?.svgs;">
-      <div #svgs style="transform: translateY(100px)"></div>
-    </ng-container>
+    <div style="margin-top: 20px !important;">
+      <p-panel header="Data">
+        <p-table [value]="paccurateResponseData" [responsive]="true">
+          <ng-template pTemplate="header">
+            <tr class="center-align">
+              <th rowspan="2">Box</th>
+              <th colspan="4">Weight</th>
+              <th colspan="4">Volume</th>
+            </tr>
+            <tr class="center-align">
+              <th>Max</th>
+              <th>Used</th>
+              <th>Remaining</th>
+              <th>Utilization</th>
+              <th>Max</th>
+              <th>Used</th>
+              <th>Remaining</th>
+              <th>Utilization</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-response>
+            <tr class="center-align">
+              <td>{{response.box}}</td>
+              <td>{{response.weightMax}}</td>
+              <td>{{response.weightUsed}}</td>
+              <td>{{response.weightRemaining}}</td>
+              <td>{{response.weightUtilization | percent:'2.2-2'}}</td>
+              <td>{{response.volumeMax}}</td>
+              <td>{{response.volumeUsed}}</td>
+              <td>{{response.volumeRemaining}}</td>
+              <td>{{response.volumeUtilization | percent:'2.2-2'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-footer>
+          <ng-container *ngIf="paccurateResponse?.lenLeftovers > 0;">
+            <p>Packed {{paccurateResponse?.lenItems - paccurateResponse?.lenLeftovers}} item(s). There
+              {{paccurateResponse?.lenLeftovers > 1 ? 'are' : 'is'}} {{paccurateResponse?.lenLeftovers}}
+              leftover(s).</p>
+            <p-table [value]="paccurateLeftOverData">
+              <ng-template pTemplate="header">
+                <tr class="center-align">
+                  <th style="width: 20%">Item Name</th>
+                  <th style="width: 15%">Dim.</th>
+                  <th style="width: 15%">Count</th>
+                  <th style="width: 50%">Message</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-left>
+                <tr class="center-align">
+                  <td style="width: 20%">{{left.name}}</td>
+                  <td style="width: 15%">{{left.dimensions.x}}x{{left.dimensions.y}}x{{left.dimensions.z}}</td>
+                  <td style="width: 15%">{{left.count}}</td>
+                  <td style="width: 50%">{{left.message}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </ng-container>
+          <ng-container *ngIf="paccurateResponse?.lenLeftovers === 0;">
+            <p>Packed {{paccurateResponse?.lenItems}} item(s). No leftovers.</p>
+          </ng-container>
+        </p-footer>
+      </p-panel>
+    </div>
+    <div id="svgs-wrapper">
+      <ng-container *ngFor="let svg of paccurateResponse?.svgs;">
+        <div #svgs style="transform: translateY(100px)"></div>
+      </ng-container>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!loading && paccurateResponse.svgs.length != 0">
+    <app-three-js [paccurateResponse]="paccurateResponse"></app-three-js>
   </ng-container>
 </ng-container>

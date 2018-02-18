@@ -1,3 +1,7 @@
+* {
+  font-family: Arial, serif;
+}
+
 html, body {
   overflow-x: hidden;
 }
@@ -22,12 +26,6 @@ html, body {
   text-align: center;
 }
 
-
-
-
-
-
-
 polygon.volume-line.solid {
   fill-opacity: 0.95;
   transition-duration: 0.2s;
@@ -41,9 +39,9 @@ polygon.volume-line.highlight {
 }
 
 polygon.volume-line {
-  stroke: #666;
+  stroke: rgba(255, 255, 255, 0.8);
   stroke-width: 1;
-  fill-opacity: 0.1;
+  fill-opacity: 0.85;
   stroke-opacity: 0.5;
 }
 
@@ -55,7 +53,7 @@ line.volume-line {
 
 .box-figure {
   width: 100%;
-  padding: 1em;
-  margin: 3em 0 0;
+  padding: 0 0 0 0;
+  margin: 0;
   display: inline-block;
 }

@@ -1,0 +1,20 @@
+@import "../../../variables";
+
+#no-request-text {
+  color: $border-color;
+}
+
+#no-request-text, #progress-spinner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 45vh;
+  color: $border-color;
+}
+
+#svgs-wrapper {
+  margin-top: 15px;
+  background-color: white;
+  border: solid 5px $border-color;
+}

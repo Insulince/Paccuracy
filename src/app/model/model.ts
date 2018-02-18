@@ -6,6 +6,8 @@ export class PaccurateRequest {
   public includeScripts?: boolean;
   public usableSpace?: number;
 
+  // public eye: Coordinates  = new Coordinates(1, 1, 2);
+
   public constructor(itemSets: Array<ItemSet>, boxTypes: Array<BoxType>, includeScripts?: boolean, usableSpace?: number) {
     this.itemSets = itemSets;
     this.boxTypes = boxTypes;
@@ -145,5 +147,43 @@ export class Item {
     this.origin = origin;
     this.refId = refId;
     this.weight = weight;
+  }
+}
+
+export class PaccurateResponseDataTable {
+  public box?: string;
+  public volumeMax?: number;
+  public volumeRemaining?: number;
+  public volumeUsed?: number;
+  public volumeUtilization?: number;
+  public weightMax?: number;
+  public weightRemaining?: number;
+  public weightUsed?: number;
+  public weightUtilization?: number;
+
+  constructor(box?: string, volumeMax?: number, volumeRemaining?: number, volumeUsed?: number, volumeUtilization?: number, weightMax?: number, weightRemaining?: number, weightUsed?: number, weightUtilization?: number) {
+    this.box = box;
+    this.volumeMax = volumeMax;
+    this.volumeRemaining = volumeRemaining;
+    this.volumeUsed = volumeUsed;
+    this.volumeUtilization = volumeUtilization;
+    this.weightMax = weightMax;
+    this.weightRemaining = weightRemaining;
+    this.weightUsed = weightUsed;
+    this.weightUtilization = weightUtilization;
+  }
+}
+
+export class PaccurateLeftOverDataTable {
+  public count?: number;
+  public dimensions?: Coordinates;
+  public message?: string;
+  public name?: string;
+
+  constructor(count?: number, dimensions?: Coordinates, message?: string, name?: string) {
+    this.count = count;
+    this.dimensions = dimensions;
+    this.message = message;
+    this.name = name;
   }
 }
