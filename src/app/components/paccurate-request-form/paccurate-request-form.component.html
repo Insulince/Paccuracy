@@ -23,9 +23,12 @@
               <input type="number" formControlName="z" class="form-control" placeholder="Depth">
             </div>
           </div>
-          <button class="btn btn-outline-danger btn-sm my-2" type="button" *ngIf="getBoxTypesControls(form).length > 1;"
-                  (click)="removeBoxType(i)">Remove
-          </button>
+          <div class="w-20">
+            <button class="btn btn-outline-danger btn-sm my-2" type="button"
+                    *ngIf="getBoxTypesControls(form).length > 1;"
+                    (click)="removeBoxType(i)">Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -69,9 +72,12 @@
             <label for="itemName">Name</label>
             <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
-          <button class="btn btn-outline-danger btn-sm my-2" type="button" *ngIf="getItemSetsControls(form).length > 1;"
-                  (click)="removeItemSet(i)">Remove
-          </button>
+          <div class="w-20">
+            <button class="btn btn-outline-danger btn-sm my-2" type="button"
+                    *ngIf="getItemSetsControls(form).length > 1;"
+                    (click)="removeItemSet(i)">Remove
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -79,5 +85,5 @@
       <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add another item</button>
     </div>
   </div>
-  <button id="pack-button" type="submit" class="btn btn-primary max-width" [disabled]="!form.valid">Pack</button>
+  <button id="pack-button" type="submit" class="btn btn-success max-width" [disabled]="!form.valid">Pack</button>
 </form>
