@@ -1,10 +1,12 @@
 @import "../variables";
 
 #brand {
-  height: 8vh;
+  height: 20vh;
   border-bottom: solid 5px $border-color;
   color: $border-color;
   background-color: $bg-color;
+  alignment: center;
+  text-align:center;
 }
 
 #form {
