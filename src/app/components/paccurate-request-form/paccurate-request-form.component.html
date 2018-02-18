@@ -49,13 +49,15 @@
             <label for="itemName">Name</label>
             <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
-          <div class="form-group">
-            <label for="color">Color</label>
-            <p-colorPicker formControlName="color" id="color"></p-colorPicker>
-          </div>
-          <div class="form-group">
-            <label for="itemWeight">Weight</label>
-            <input type="number" id="itemWeight" class="form-control" formControlName="weight">
+          <div class="form-row">
+            <div class="col-3 form-group">
+              <label for="color">Color</label>
+              <p-colorPicker formControlName="color" id="color"></p-colorPicker>
+            </div>
+            <div class="col-9 form-group">
+              <!--<label for="itemWeight">Weight</label>-->
+              <input type="number" id="itemWeight" class="form-control" formControlName="weight" placeholder="Weight">
+            </div>
           </div>
           <div class="form-row form-group" formGroupName="dimensions">
             <div class="col-4">
