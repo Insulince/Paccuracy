@@ -1,7 +1,6 @@
 @import "../variables";
 
 #brand, #logo, #info {
-  height: 12vh;
   border-bottom: solid 5px $border-color;
   color: $border-color;
   background-color: $bg-color;
@@ -31,15 +30,15 @@
   overflow: hidden;
 }
 
-.brand-logo {
-  position: absolute;
-  top: -10px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-}
+//.brand-logo {
+//  position: absolute;
+//  top: -10px;
+//  left: 0;
+//  right: 0;
+//  margin-left: auto;
+//  margin-right: auto;
+//}
 
-#brand {
-  margin-top: 20px;
-}
+//#brand {
+//  margin-top: 20px;
+//}

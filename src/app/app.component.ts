@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {GrowlService} from "./services/growl.service";
 import {Message} from "primeng/api";
 import {PaccurateService} from "./services/paccurate.service";
@@ -10,7 +10,6 @@ import {PaccurateService} from "./services/paccurate.service";
 })
 
 export class AppComponent implements OnInit {
-  @ViewChild('myModal') myModal:ElementRef;
   messages: Array<Message> = [];
   formToggled = true;
 
@@ -19,7 +18,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myModal.nativeElement.click();
     this.growlService.messageAdded.subscribe(
       (message: Message): void => {
         this.messages.push(message);
