@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormArray, FormControl, FormGroup} from "@angular/forms";
 import * as _ from "lodash";
 import * as moment from "moment";
 
@@ -29,10 +29,12 @@ export abstract class BaseForm {
         _.each(control.controls, (childControl: FormControl, childControlName: string): void => {
           this[childControlName] = childControl;
         });
-      } else if (control instanceof FormControl) {
-        this[controlName] = control;
       } else {
-        console.log(control);
+        if (control instanceof FormArray) {
+          this[controlName] = <FormArray>control;
+        } else {
+          this[controlName] = control;
+        }
       }
     });
   }

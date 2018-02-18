@@ -5,7 +5,6 @@ import "rxjs/add/operator/filter";
 import "rxjs/add/operator/mergeMap";
 import {groupBy} from "lodash";
 import {GrowlService} from "../../services/growl.service";
-import {Message} from "primeng/api";
 
 @Component({
   selector: "app-paccurate-response-view",
@@ -18,6 +17,7 @@ export class PaccurateResponseViewComponent implements OnInit {
   public requestSubmitted: boolean;
   public paccurateResponseData: PaccurateResponseDataTable[] = [];
   public paccurateLeftOverData: PaccurateLeftOverDataTable[] = [];
+  private polygonRegex = /<polygon (.*?)>/gi;
 
   @ViewChildren("svgs") svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
 
@@ -47,28 +47,29 @@ export class PaccurateResponseViewComponent implements OnInit {
         }
         this.loading = false;
 
-        if (response.lenLeftovers === 0) {
-          this.growlService.add({
-            severity: "success",
-            summary: "Success",
-            detail: "Packaging successful!"
-          });
-        } else {
-          this.growlService.add({
-            severity: "error",
-            summary: "Failure",
-            detail: "Packaging failed!"
-          });
-        }
+        this.growlService.add({
+          severity: response.lenLeftovers === 0 ? "success" : "warn",
+          summary: response.lenLeftovers === 0 ? "Success" : "Success with leftovers",
+          detail: response.lenLeftovers === 0 ? "Packaging successful!" : "Packaging succeeded for most of your items, but some exceeded the maximum weight and/or maximum size."
+        });
 
         return this.svgs.changes;
       })
       .subscribe(data => {
-        console.log(data);
         this.svgs.forEach(
           (svg, i) => {
             svg.nativeElement.style = "transform: translateY(0px); transition: all 0.5s ease-in-out";
-            svg.nativeElement.innerHTML = this.paccurateResponse.svgs[i];
+            const svgsWithoutPolygons = this.paccurateResponse.svgs[i].replace(this.polygonRegex, "");
+            const polygons = this.paccurateResponse.svgs[i].match(this.polygonRegex);
+
+            svg.nativeElement.innerHTML = svgsWithoutPolygons;
+            const svgElement = svg.nativeElement.firstChild.firstChild;
+            polygons.forEach(polygon => {
+              polygon = polygon.replace(/class='volume-line'/gi, `class='volume-line animated bounceInDown'`);
+              setTimeout(() => {
+                svgElement.insertAdjacentHTML("beforeend", polygon);
+              }, 500);
+            });
           }
         );
       });
@@ -77,7 +78,8 @@ export class PaccurateResponseViewComponent implements OnInit {
   private constructPaccurateResponseDataTable(response: PaccurateResponse) {
     response.boxes.forEach((boxWrapper: BoxWrapper, index: number) => {
       const responseData: PaccurateResponseDataTable = new PaccurateResponseDataTable();
-      responseData.box = `${boxWrapper.box.dimensions.x}x${boxWrapper.box.dimensions.y}x${boxWrapper.box.dimensions.z}`;
+      responseData.boxName = boxWrapper.box.name;
+      responseData.boxDim = `${boxWrapper.box.dimensions.x}x${boxWrapper.box.dimensions.y}x${boxWrapper.box.dimensions.z}`;
       responseData.volumeMax = boxWrapper.box.volumeMax;
       responseData.volumeRemaining = boxWrapper.box.volumeRemaining;
       responseData.volumeUsed = boxWrapper.box.volumeUsed;

@@ -5,22 +5,22 @@
       <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
           <div class="form-group">
-            <label for="weightMax">Maximum Weight</label>
-            <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
-          </div>
-          <div class="form-group">
             <label for="boxName">Box Name</label>
             <input type="text" class="form-control" id="boxName" formControlName="name">
           </div>
+          <div class="form-group">
+            <label for="weightMax">Maximum Weight</label>
+            <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
+          </div>
           <div class="form-row form-group" formGroupName="dimensions">
             <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              <input type="number" formControlName="z" class="form-control" placeholder="Length">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
           </div>
           <div class="w-20">
@@ -41,9 +41,13 @@
     <div class="card-body">
       <div class="my-3" *ngFor="let itemSet of getItemSetsControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
+          <!--<div class="form-group">-->
+          <!--<label for="refId">Ref. ID</label>-->
+          <!--<input type="number" id="refId" class="form-control" formControlName="refId">-->
+          <!--</div>-->
           <div class="form-group">
-            <label for="refId">Ref. ID</label>
-            <input type="number" id="refId" class="form-control" formControlName="refId">
+            <label for="itemName">Name</label>
+            <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
           <div class="form-group">
             <label for="color">Color</label>
@@ -55,22 +59,18 @@
           </div>
           <div class="form-row form-group" formGroupName="dimensions">
             <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              <input type="number" formControlName="z" class="form-control" placeholder="Length">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
           </div>
           <div class="form-group">
             <label for="quantity">Quantity</label>
             <input type="number" id="quantity" class="form-control" formControlName="quantity">
-          </div>
-          <div class="form-group">
-            <label for="itemName">Name</label>
-            <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
           <div class="w-20">
             <button class="btn btn-outline-danger btn-sm my-2" type="button"

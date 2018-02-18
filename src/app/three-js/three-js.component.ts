@@ -5,7 +5,6 @@ import {BoxWrapper, ItemWrapper, PaccurateResponse} from "../model/model";
 import "three/examples/js/controls/OrbitControls";
 import "three/examples/js/loaders/ColladaLoader";
 import {PaccurateService} from "../services/paccurate.service";
-import {Color} from "three";
 
 @Component({
   selector: "app-three-js",
@@ -222,6 +221,15 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log("After View Init");
     console.log("Response", this.paccurateResponse);
+
+    this.boxGeometries = [];
+    this.boxMaterials = [];
+    this.boxCubes = [];
+    this.itemGeometries = [];
+    this.itemMaterials = [];
+    this.itemCubes = [];
+    this.currentlyFocusedBoxIndex = 0;
+
     this.createScene();
     this.createLight();
     this.createCamera();
@@ -235,7 +243,6 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.paccurateService.paccurateResponseObs
       .subscribe((response: PaccurateResponse) => {
         this.paccurateResponse = response;
-        console.log(this.scene.children);
         while (this.scene.children.length > 0) {
           this.scene.remove(this.scene.children[0]);
         }
@@ -252,16 +259,12 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
       const currentBoxDimensions = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
       const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
-      // this.camera.position.x = currentBoxDimensions.z + 3 + currentBoxPositions.x;
-      // this.camera.position.y = currentBoxDimensions.x * 8 + currentBoxPositions.y;
-      // this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z - 20;
-
-      this.camera.position.x = currentBoxDimensions.z + 3 + currentBoxPositions.x;
-      this.camera.position.y = currentBoxDimensions.x * 8 + currentBoxPositions.y;
-      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z - 20;
-
-      this.controls.update();
+      this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
+      this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
     }
+
+    this.controls.update();
   }
 
   lookAtNextBox(): void {
@@ -272,15 +275,11 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
       const currentBoxDimensions = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
       const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
-      this.camera.position.x = currentBoxDimensions.z + 3 + currentBoxPositions.x;
-      this.camera.position.y = currentBoxDimensions.x * 9 + currentBoxPositions.y;
-      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z - 20;
-
-      // this.camera.position.x = currentBoxDimensions.z + 3 + currentBoxPositions.x;
-      // this.camera.position.y = currentBoxDimensions.x * 8 + currentBoxPositions.y;
-      // this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z - 20;
-
-      this.controls.update();
+      this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
+      this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
     }
+
+    this.controls.update();
   }
 }
