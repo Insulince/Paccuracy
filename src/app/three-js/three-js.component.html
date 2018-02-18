@@ -1,3 +1,9 @@
 <canvas id="three-canvas" #canvas (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)"></canvas>
-<button (click)="lookAtPreviousBox()">Previous</button>
-<button (click)="lookAtNextBox()">Next</button>
+<div class="row margin-bottom">
+  <div class="col-6">
+    <button class="max-width btn btn-info" (click)="lookAtPreviousBox()"><i class="fa fa-chevron-left"></i> Previous</button>
+  </div>
+  <div class="col-6">
+    <button class="max-width btn btn-info" (click)="lookAtNextBox()">Next <i class="fa fa-chevron-right"></i></button>
+  </div>
+</div>

@@ -1,26 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="request-form">
-  <div style="background-color: chocolate ;" class="card my-2" formArrayName="boxTypes">
-    <h2 style="text-align: center; border-color: aliceblue ">Boxes</h2>
+  <div class="card my-2" formArrayName="boxTypes">
+    <div class="card-header">Boxes<span class="header-description">The things you'll put items into</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
           <div class="form-group">
-            <label for="weightMax">Maximum Weight</label>
-            <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
-          </div>
-          <div class="form-group">
             <label for="boxName">Box Name</label>
             <input type="text" class="form-control" id="boxName" formControlName="name">
           </div>
-          <div class="form-row form-group" formGroupName="dimensions">
+          <div class="form-group">
+            <label for="weightMax">Maximum Weight</label>
+            <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
+          </div>
+          <div class="form-row form-group" formGroupName="dimensions" id="itemDimensions">
+            <label class="col-md-12" for="itemDimensions">Dimensions</label>
             <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              <input type="number" formControlName="z" class="form-control" placeholder="Length">
             </div>
           </div>
           <div class="w-20">
@@ -33,44 +34,47 @@
       </div>
     </div>
     <div class="card-footer">
-        <button class="btn btn-warning btn-sm" type="button" (click)="addBoxType()">Add another box</button>
+      <button class="btn btn-primary btn-sm" type="button" (click)="addBoxType()">Add another box</button>
     </div>
   </div>
   <div class="card my-2" formArrayName="itemSets">
-    <div class="card-header">Items</div>
+    <div class="card-header">Items<span class="header-description">The things you'll put in the boxes</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let itemSet of getItemSetsControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
+          <!--<div class="form-group">-->
+          <!--<label for="refId">Ref. ID</label>-->
+          <!--<input type="number" id="refId" class="form-control" formControlName="refId">-->
+          <!--</div>-->
           <div class="form-group">
-            <label for="refId">Ref. ID</label>
-            <input type="number" id="refId" class="form-control" formControlName="refId">
+            <label for="itemName">Item Name</label>
+            <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
-          <div class="form-group">
-            <label for="color">Color</label>
-            <p-colorPicker formControlName="color" id="color"></p-colorPicker>
+          <div class="form-row">
+            <div class="col-3 form-group">
+              <label for="color">Color</label>
+              <p-colorPicker formControlName="color" id="color"></p-colorPicker>
+            </div>
+            <div class="col-9 form-group">
+              <!--<label for="itemWeight">Weight</label>-->
+              <input type="number" id="itemWeight" class="form-control" formControlName="weight" placeholder="Weight">
+            </div>
           </div>
-          <div class="form-group">
-            <label for="itemWeight">Weight</label>
-            <input type="number" id="itemWeight" class="form-control" formControlName="weight">
-          </div>
-          <div class="form-row form-group" formGroupName="dimensions">
+          <div class="form-row form-group" formGroupName="dimensions" id="boxDimensions">
+            <label class="col-md-12" for="boxDimensions">Dimensions</label>
             <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Width">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="y" class="form-control" placeholder="Height">
+              <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
-              <input type="number" formControlName="z" class="form-control" placeholder="Depth">
+              <input type="number" formControlName="z" class="form-control" placeholder="Length">
             </div>
           </div>
           <div class="form-group">
             <label for="quantity">Quantity</label>
             <input type="number" id="quantity" class="form-control" formControlName="quantity">
-          </div>
-          <div class="form-group">
-            <label for="itemName">Name</label>
-            <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
           <div class="w-20">
             <button class="btn btn-outline-danger btn-sm my-2" type="button"
@@ -82,7 +86,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-warning btn-sm" type="button" (click)="addItemSet()">Add another item</button>
+      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add another item</button>
     </div>
   </div>
   <button id="pack-button" type="submit" class="btn btn-success max-width" [disabled]="!form.valid">Pack</button>

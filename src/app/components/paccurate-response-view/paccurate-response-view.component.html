@@ -30,7 +30,10 @@
           </ng-template>
           <ng-template pTemplate="body" let-response>
             <tr class="center-align">
-              <td>{{response.box}}</td>
+              <td>{{response.boxName}}
+                <br>
+                ({{response.boxDim}})
+              </td>
               <td>{{response.weightMax}}</td>
               <td>{{response.weightUsed}}</td>
               <td>{{response.weightRemaining}}</td>
@@ -72,10 +75,26 @@
         </p-footer>
       </p-panel>
     </div>
-    <div id="svgs-wrapper">
-      <ng-container *ngFor="let svg of paccurateResponse?.svgs;">
-        <div #svgs style="transform: translateY(100px)"></div>
-      </ng-container>
+    <div class="row">
+      <div class="margin-top" [ngClass]="{'col-6': formToggled, 'col-4': !formToggled}"
+           *ngFor="let svg of paccurateResponse?.svgs; let i = index;">
+        <ng-container>
+          <p class="svg-descriptor">Package {{i + 1}} ("{{paccurateResponse.boxes[i].box.name}}")</p>
+          <div class="svgs-wrapper">
+            <div #svgs style="transform: translateY(-200px)"></div>
+          </div>
+        </ng-container>
+      </div>
+      <!--<div class="col-6 margin-top">-->
+      <!--<ng-container *ngFor="let svg of paccurateResponse?.svgs; let i = index;">-->
+      <!--<ng-container *ngIf="i % 2 == 1">-->
+      <!--<p class="svg-descriptor">Package {{i + 1}}</p>-->
+      <!--<div class="svgs-wrapper">-->
+      <!--<div #svgs style="transform: translateY(100px)"></div>-->
+      <!--</div>-->
+      <!--</ng-container>-->
+      <!--</ng-container>-->
+      <!--</div>-->
     </div>
   </ng-container>
   <ng-container *ngIf="!loading && paccurateResponse.svgs.length != 0">

@@ -1,43 +1,20 @@
-
 <div class="container-fluid">
   <div class="row">
     <div id="brand" class="col-12">
+      <span class="left-align" (click)="onFormToggled($event)" style="font-size: 46px; cursor: pointer">
+        {{formToggled ? 'Close' : 'Pack'}}
+        <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
+      </span>
      <img src="../assets/pblogoSMAL.png" height="80" width="200"/>
       <i class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px; float: right;"></i>
 
     </div>
   </div>
-
-  <!--&lt;!&ndash;<script type="text/javascript">&ndash;&gt;-->
-    <!--&lt;!&ndash;//Call the method on pageload&ndash;&gt;-->
-    <!--&lt;!&ndash;$(window).on('load', function(){&ndash;&gt;-->
-      <!--&lt;!&ndash;//Disply the modal popup&ndash;&gt;-->
-      <!--&lt;!&ndash;$('#myModal').modal('show');&ndash;&gt;-->
-    <!--&lt;!&ndash;});&ndash;&gt;-->
-  <!--&lt;!&ndash;</script>&ndash;&gt;-->
-  <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
-    <!--<div class="modal-dialog">-->
-      <!--<div class="modal-content">-->
-        <!--<div class="modal-header">-->
-          <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-          <!--<h4 class="modal-title" id="myModalLabel">Modal title Here</h4>-->
-        <!--</div>-->
-        <!--<div class="modal-body">-->
-          <!--<ul>-->
-            <!---->
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</div>-->
-  <!--</div>-->
-
   <div class="row">
-    <div id="form" class="col-md-4 col-sm-12">
+    <div id="form" class="col-md-4 col-sm-12" [ngClass]="{'d-none': !formToggled}">
       <app-paccurate-request-form></app-paccurate-request-form>
     </div>
-    <div id="view" class="col-md-8 col-sm-12 stopOverflow">
+    <div id="view" class="col-sm-12 stopOverflow" [ngClass]="{'col-md-8 ': formToggled, 'col-md-12': !formToggled}">
       <app-paccurate-response-view></app-paccurate-response-view>
     </div>
   </div>
@@ -82,4 +59,3 @@
 </div>
 
 <p-growl [(value)]="messages" [life]="5000" [immutable]="false"></p-growl>
-

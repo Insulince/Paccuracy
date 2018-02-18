@@ -1,22 +1,25 @@
 @import "../variables";
 
 #brand {
-  height: 12vh;
+  height: 8vh;
   border-bottom: solid 5px $border-color;
   color: $border-color;
   background-color: $bg-color;
-  alignment: center;
-  text-align:center;
 }
 
 #form {
   border-right: solid 5px $border-color;
   background-color: $bg-color;
-  border: 1px solid #aaa;
+  transition: all 0.3s ease-in-out;
+
+  &.collapsed {
+    margin-left: -34%;
+  }
 }
 
 #view {
   background-color: $bg-color;
+  //transition: all 0.3s ease-in-out;
 }
 
 #form, #view {
