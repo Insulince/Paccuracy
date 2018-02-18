@@ -1,13 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div id="brand" class="col-12">
+    <div id="brand" class="col-4">
       <span class="left-align" (click)="onFormToggled($event)" style="font-size: 46px; cursor: pointer">
         {{formToggled ? 'Close' : 'Pack'}}
         <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
-      </span>
-     <img src="../assets/pblogoSMAL.png" height="80" width="200"/>
+      </span></div>
+      <div  id="logo" class="col-4">
+      <!--<img  src="../assets/pblogoSMAL.png" height="50" width="100"/>-->
+      </div>
+<div id="info" class="col-4">
       <i class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px; float: right;"></i>
-
     </div>
   </div>
   <div class="row">
@@ -25,10 +27,9 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
-      </div>
       <div class="modal-body">
 
+        <img class="center-align" src="../assets/pblogoSMAL.png" height="80" width="150"/>
 
 
           <h3>How it works</h3>
@@ -36,7 +37,7 @@
           <li><strong>First;</strong> set the maximum weight of the box (Hint: It should be large)</li>
           <li>Set the box name and dimensions</li>
           <li>Feel Free to add another box and fill out the fields!</li></ul>
-        <ul><li><strong>Now</strong> it's time to add the items you want to fit in the box!</li>
+        <ul><li><strong>Second</strong> it's time to add the items you want to fit in the box!</li>
           <li>Set the weight, quantity and name of your items</li>
           <li>Feel free to add another item</li>
         <li> Press the "Pack" button to see some magic</li></ul>
