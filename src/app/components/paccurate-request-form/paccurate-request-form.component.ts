@@ -42,8 +42,8 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
 
   private newItemSet(): FormGroup {
     return this.fB.group({
-      refId: [],
-      color: [""],
+      refId: [this.genRefId()],
+      color: [this.genHex()],
       weight: [],
       dimensions: this.fB.group({
         x: [],
@@ -89,5 +89,13 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
 
   removeBoxType(index: number) {
     (<FormArray>this.form.get("boxTypes")).removeAt(index);
+  }
+
+  private genRefId(): number {
+    return Math.floor(Math.random() * (999 - 100) + 100);
+  }
+
+  private genHex(): string {
+    return "#" + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
   }
 }
