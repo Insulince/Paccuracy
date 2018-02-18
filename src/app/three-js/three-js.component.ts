@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from "@angular/core";
 import * as THREE from "three";
 import "./js/EnableThreeExamples";
-import {PaccurateResponse} from "../model/model";
+import {BoxWrapper, ItemWrapper, PaccurateResponse} from "../model/model";
 import "three/examples/js/controls/OrbitControls";
 import "three/examples/js/loaders/ColladaLoader";
 import {PaccurateService} from "../services/paccurate.service";
@@ -12,7 +12,6 @@ import {PaccurateService} from "../services/paccurate.service";
   styleUrls: ["./three-js.component.scss"]
 })
 export class ThreeJsComponent implements OnInit, AfterViewInit {
-
   private renderer: THREE.WebGLRenderer;
   private camera: THREE.PerspectiveCamera;
   public scene: THREE.Scene;
@@ -26,6 +25,14 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
   @ViewChild("canvas")
   private canvasRef: ElementRef;
+
+  public currentlyFocusedBoxIndex: number;
+  public boxGeometries: Array<THREE.BoxGeometry> = [];
+  public boxMaterials: Array<THREE.MeshBasicMaterial> = [];
+  public boxCubes: Array<THREE.Mesh> = [];
+  public itemGeometries: Array<THREE.BoxGeometry> = [];
+  public itemMaterials: Array<THREE.MeshStandardMaterial> = [];
+  public itemCubes: Array<THREE.Mesh> = [];
 
   constructor(private paccurateService: PaccurateService) {
     this.render = this.render.bind(this);
@@ -41,19 +48,19 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     // this.scene.add(new THREE.AxesHelper(200));
 
     this.paccurateResponse.boxes.forEach(
-      (boxWrapper, i) => {
-        let geometry = new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y),
-          material = new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10});
-        let container = new THREE.Mesh(geometry, material);
-        container.position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
-        this.scene.add(container);
+      (boxWrapper: BoxWrapper, i: number): void => {
+        this.boxGeometries.push(new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y));
+        this.boxMaterials.push(new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10}));
+        this.boxCubes.push(new THREE.Mesh(this.boxGeometries[this.boxGeometries.length - 1], this.boxMaterials[this.boxMaterials.length - 1]));
+        this.boxCubes[this.boxCubes.length - 1].position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
+        this.scene.add(this.boxCubes[this.boxCubes.length - 1]);
         boxWrapper.box.items.forEach(
-          (itemWrapper) => {
-            let geometry = new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y),
-              material = new THREE.MeshStandardMaterial({color: itemWrapper.item.color});
-            let box = new THREE.Mesh(geometry, material);
-            box.position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
-            this.scene.add(box);
+          (itemWrapper: ItemWrapper): void => {
+            this.itemGeometries.push(new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y));
+            this.itemMaterials.push(new THREE.MeshStandardMaterial({color: itemWrapper.item.color}));
+            this.itemCubes.push(new THREE.Mesh(this.itemGeometries[this.itemGeometries.length - 1], this.itemMaterials[this.itemMaterials.length - 1]));
+            this.itemCubes[this.itemCubes.length - 1].position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((itemWrapper.item.origin.z + boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
+            this.scene.add(this.itemCubes[this.itemCubes.length - 1]);
           }
         );
       }
@@ -80,9 +87,12 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     );
 
     // Set position and look at
-    this.camera.position.x = 10;
-    this.camera.position.y = 10;
-    this.camera.position.z = 100;
+    const firstBoxDimensions = this.paccurateResponse.boxes[0].box.dimensions;
+    this.camera.position.x = firstBoxDimensions.z / 2;
+    this.camera.position.y = firstBoxDimensions.x / 2;
+    this.camera.position.z = firstBoxDimensions.y * firstBoxDimensions.z;
+
+    // X = Z, Y = X, Z = Y
   }
 
   private getAspectRatio(): number {
@@ -106,12 +116,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.renderer.setClearColor(0xffffff, 1);
     this.renderer.autoClear = true;
 
-    let component: ThreeJsComponent = this;
-
-    (function render() {
-      //requestAnimationFrame(render);
-      component.render();
-    }());
+    this.render();
   }
 
   public render() {
@@ -126,6 +131,9 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.controls.zoomSpeed = 1.2;
     this.controls.addEventListener("change", this.render);
 
+    this.currentlyFocusedBoxIndex = 0;
+    const firstBox = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
+    this.controls.target = new THREE.Vector3(firstBox.z / 2, firstBox.x / 2, firstBox.y / 2);
   }
 
   /* EVENTS */
@@ -193,6 +201,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.createCamera();
     this.startRendering();
     this.addControls();
+
+    this.controls.update();
   }
 
   ngOnInit() {
@@ -208,4 +218,28 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       });
   }
 
+  lookAtPreviousBox(): void {
+    if (this.currentlyFocusedBoxIndex > 0) {
+      this.currentlyFocusedBoxIndex--;
+      const currentBox = this.boxCubes[this.currentlyFocusedBoxIndex];
+      this.controls.target.set(currentBox.position.x, currentBox.position.y, currentBox.position.z);
+
+      // const firstBoxDimensions = this.paccurateResponse.boxes[0].box.dimensions;
+      // this.camera.position.x = firstBoxDimensions.z / 2;
+      // this.camera.position.y = firstBoxDimensions.x / 2;
+      // this.camera.position.z = firstBoxDimensions.y * firstBoxDimensions.z;
+
+
+      this.controls.update();
+    }
+  }
+
+  lookAtNextBox(): void {
+    if (this.currentlyFocusedBoxIndex < this.boxCubes.length - 1) {
+      this.currentlyFocusedBoxIndex++;
+      const currentBox = this.boxCubes[this.currentlyFocusedBoxIndex];
+      this.controls.target.set(currentBox.position.x, currentBox.position.y, currentBox.position.z);
+      this.controls.update();
+    }
+  }
 }
