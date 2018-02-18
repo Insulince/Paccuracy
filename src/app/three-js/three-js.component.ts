@@ -19,7 +19,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
   public fieldOfView: number = 20;
   public nearClippingPane: number = 1;
-  public farClippingPane: number = 1100;
+  public farClippingPane: number = 5000;
 
   public controls: THREE.OrbitControls;
 
