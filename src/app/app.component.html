@@ -1,11 +1,15 @@
 <div class="container-fluid">
   <div class="row">
-    <div id="brand" class="col-12">
+    <div id="brand" class="col-4">
       <span class="left-align" (click)="onFormToggled($event)" style="font-size: 46px; cursor: pointer">
         {{formToggled ? 'Close' : 'Pack'}}
         <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
-      </span>
-      <h1 class="center-align" style="margin-top: -63px">Paccuracy</h1>
+      </span></div>
+      <div  id="logo" class="col-4">
+      <!--<img  src="../assets/pblogoSMAL.png" height="50" width="100"/>-->
+      </div>
+<div id="info" class="col-4">
+      <i class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px; float: right;"></i>
     </div>
   </div>
   <div class="row">
@@ -15,6 +19,43 @@
     <div id="view" class="col-sm-12 stopOverflow" [ngClass]="{'col-md-8 ': formToggled, 'col-md-12': !formToggled}">
       <app-paccurate-response-view></app-paccurate-response-view>
     </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+
+        <img class="center-align" src="../assets/pblogoSMAL.png" height="80" width="150"/>
+
+
+          <h3>How it works</h3>
+        <ul>
+          <li><strong>First;</strong> set the maximum weight of the box (Hint: It should be large)</li>
+          <li>Set the box name and dimensions</li>
+          <li>Feel Free to add another box and fill out the fields!</li></ul>
+        <ul><li><strong>Second</strong> it's time to add the items you want to fit in the box!</li>
+          <li>Set the weight, quantity and name of your items</li>
+          <li>Feel free to add another item</li>
+        <li> Press the "Pack" button to see some magic</li></ul>
+
+        <h4> This Application was made by:</h4>
+        <ul><li>Chau Tran</li>
+          <li>Justin Reusnow</li>
+          <li>Kyle Hopfer</li>
+          <li>Michael Lacy</li>
+          <li>Hamad Alquait</li></ul>
+
+        <p>Thanks to paccurate.io and UMSL</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
