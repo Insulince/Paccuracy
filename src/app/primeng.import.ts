@@ -1,6 +1,6 @@
 import {NgModule} from "@angular/core";
 import {ColorPickerModule} from "primeng/colorpicker";
-import {ProgressSpinnerModule} from "primeng/primeng";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {GrowlModule} from "primeng/growl";
 import {TableModule} from "primeng/table";
 import {TabViewModule} from "primeng/tabview";
@@ -12,7 +12,7 @@ import {PanelModule} from "primeng/panel";
     ProgressSpinnerModule,
     TableModule,
     TabViewModule,
-    PanelModule
+    PanelModule,
     GrowlModule
   ],
   exports: [
@@ -20,7 +20,7 @@ import {PanelModule} from "primeng/panel";
     ProgressSpinnerModule,
     TableModule,
     TabViewModule,
-    PanelModule
+    PanelModule,
     GrowlModule
   ]
 })
