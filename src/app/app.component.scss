@@ -1,7 +1,7 @@
 @import "../variables";
 
 #brand, #logo, #info {
-  height: 8vh;
+  height: 12vh;
   border-bottom: solid 5px $border-color;
   color: $border-color;
   background-color: $bg-color;
@@ -23,10 +23,23 @@
 }
 
 #form, #view {
-  height: 92vh;
+  height: 88vh;
   overflow: auto;
 }
 
 .stopOverflow {
   overflow: hidden;
+}
+
+.brand-logo {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#brand {
+  margin-top: 20px;
 }
