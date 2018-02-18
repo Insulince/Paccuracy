@@ -224,11 +224,11 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       const currentBox = this.boxCubes[this.currentlyFocusedBoxIndex];
       this.controls.target.set(currentBox.position.x, currentBox.position.y, currentBox.position.z);
 
-      // const firstBoxDimensions = this.paccurateResponse.boxes[0].box.dimensions;
-      // this.camera.position.x = firstBoxDimensions.z / 2;
-      // this.camera.position.y = firstBoxDimensions.x / 2;
-      // this.camera.position.z = firstBoxDimensions.y * firstBoxDimensions.z;
-
+      const currentBoxDimensions = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
+      const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
+      this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
+      this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z;
 
       this.controls.update();
     }
@@ -239,6 +239,13 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       this.currentlyFocusedBoxIndex++;
       const currentBox = this.boxCubes[this.currentlyFocusedBoxIndex];
       this.controls.target.set(currentBox.position.x, currentBox.position.y, currentBox.position.z);
+
+      const currentBoxDimensions = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
+      const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
+      this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
+      this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z;
+
       this.controls.update();
     }
   }
