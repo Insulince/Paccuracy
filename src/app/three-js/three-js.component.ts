@@ -53,26 +53,30 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
         this.boxMaterials.push(new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10}));
         this.boxCubes.push(new THREE.Mesh(this.boxGeometries[this.boxGeometries.length - 1], this.boxMaterials[this.boxMaterials.length - 1]));
         this.boxCubes[this.boxCubes.length - 1].position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
-        this.scene.add(this.boxCubes[this.boxCubes.length - 1]);
         boxWrapper.box.items.forEach(
           (itemWrapper: ItemWrapper): void => {
             this.itemGeometries.push(new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y));
             this.itemMaterials.push(new THREE.MeshStandardMaterial({color: itemWrapper.item.color}));
             this.itemCubes.push(new THREE.Mesh(this.itemGeometries[this.itemGeometries.length - 1], this.itemMaterials[this.itemMaterials.length - 1]));
-            this.itemCubes[this.itemCubes.length - 1].position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
-            this.scene.add(this.itemCubes[this.itemCubes.length - 1]);
+            this.itemCubes[this.itemCubes.length - 1].position.set(
+              (itemWrapper.item.dimensions.z - boxWrapper.box.dimensions.z) / 2 + itemWrapper.item.origin.z,
+              (itemWrapper.item.dimensions.x - boxWrapper.box.dimensions.x) / 2 + itemWrapper.item.origin.x,
+              (itemWrapper.item.dimensions.y - boxWrapper.box.dimensions.y) / 2 + itemWrapper.item.origin.y
+            );
+            this.boxCubes[this.boxCubes.length - 1].add(this.itemCubes[this.itemCubes.length - 1]);
           }
         );
+        this.scene.add(this.boxCubes[this.boxCubes.length - 1]);
       }
     );
   }
 
   private createLight() {
-    var light = new THREE.PointLight(0xffffff, 1, 1000);
+    let light = new THREE.PointLight(0xffffff, 1, 1000);
     light.position.set(0, 0, 100);
     this.scene.add(light);
 
-    var light = new THREE.PointLight(0xffffff, 1, 1000);
+    let light = new THREE.PointLight(0xffffff, 1, 1000);
     light.position.set(0, 0, -100);
     this.scene.add(light);
   }
