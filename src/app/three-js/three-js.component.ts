@@ -63,6 +63,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
               (itemWrapper.item.dimensions.x - boxWrapper.box.dimensions.x) / 2 + itemWrapper.item.origin.x,
               (itemWrapper.item.dimensions.y - boxWrapper.box.dimensions.y) / 2 + itemWrapper.item.origin.y
             );
+            this.itemCubes[this.itemCubes.length - 1].material.transparent = true;
+            this.itemCubes[this.itemCubes.length - 1].material.opacity = 0.5;
             this.boxCubes[this.boxCubes.length - 1].add(this.itemCubes[this.itemCubes.length - 1]);
           }
         );
@@ -78,6 +80,22 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
     light = new THREE.PointLight(0xffffff, 1, 1000);
     light.position.set(0, 0, -100);
+    this.scene.add(light);
+
+    light = new THREE.PointLight(0xffffff, 1, 1000);
+    light.position.set(0, 100, 0);
+    this.scene.add(light);
+
+    light = new THREE.PointLight(0xffffff, 1, 1000);
+    light.position.set(0, -100, 0);
+    this.scene.add(light);
+
+    light = new THREE.PointLight(0xffffff, 1, 1000);
+    light.position.set(-50, 0, 0);
+    this.scene.add(light);
+
+    light = new THREE.PointLight(0xffffff, 1, 1000);
+    light.position.set(500, 0, 0);
     this.scene.add(light);
   }
 
@@ -124,7 +142,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   }
 
   public render() {
-    // this.renderer.render(this.scene, this.camera);
+    // this.itemCubes[0].material.opacity = 0.5; // or any other value you like
+    console.log("asdf");
     let self: ThreeJsComponent = this;
     self.renderer.render(this.scene, this.camera);
   }
