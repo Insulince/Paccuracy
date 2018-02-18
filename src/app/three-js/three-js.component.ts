@@ -17,7 +17,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   public scene: THREE.Scene;
   @Input() paccurateResponse: PaccurateResponse;
 
-  public fieldOfView: number = 60;
+  public fieldOfView: number = 20;
   public nearClippingPane: number = 1;
   public farClippingPane: number = 1100;
 

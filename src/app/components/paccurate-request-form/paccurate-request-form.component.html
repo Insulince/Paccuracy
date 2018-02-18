@@ -12,7 +12,8 @@
             <label for="weightMax">Maximum Weight</label>
             <input type="number" formControlName="weightMax" class="form-control" id="weightMax">
           </div>
-          <div class="form-row form-group" formGroupName="dimensions">
+          <div class="form-row form-group" formGroupName="dimensions" id="itemDimensions">
+            <label class="col-md-12" for="itemDimensions">Dimensions</label>
             <div class="col-4">
               <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
@@ -59,7 +60,8 @@
               <input type="number" id="itemWeight" class="form-control" formControlName="weight" placeholder="Weight">
             </div>
           </div>
-          <div class="form-row form-group" formGroupName="dimensions">
+          <div class="form-row form-group" formGroupName="dimensions" id="boxDimensions">
+            <label class="col-md-12" for="boxDimensions">Dimensions</label>
             <div class="col-4">
               <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
