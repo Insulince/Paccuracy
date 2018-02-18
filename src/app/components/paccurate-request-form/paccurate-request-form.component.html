@@ -74,7 +74,6 @@
           </div>
           <div class="w-20">
             <button class="btn btn-outline-danger btn-sm my-2" type="button"
-                    *ngIf="getItemSetsControls(form).length > 1;"
                     (click)="removeItemSet(i)">Remove
             </button>
           </div>
@@ -82,7 +81,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add another item</button>
+      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add item</button>
     </div>
   </div>
   <button id="pack-button" type="submit" class="btn btn-success max-width" [disabled]="!form.valid">Pack</button>
