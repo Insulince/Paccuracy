@@ -1,7 +1,7 @@
 @import "../variables";
 
 #brand {
-  height: 20vh;
+  height: 12vh;
   border-bottom: solid 5px $border-color;
   color: $border-color;
   background-color: $bg-color;
@@ -12,6 +12,7 @@
 #form {
   border-right: solid 5px $border-color;
   background-color: $bg-color;
+  border: 1px solid #aaa;
 }
 
 #view {

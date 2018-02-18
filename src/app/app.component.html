@@ -1,9 +1,37 @@
+
 <div class="container-fluid">
   <div class="row">
     <div id="brand" class="col-12">
-     <img src="../assets/pblogosm.png" height="141" width="290"/>
+     <img src="../assets/pblogoSMAL.png" height="80" width="200"/>
+      <i type="button" class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px;"></i>
     </div>
   </div>
+
+  <!--&lt;!&ndash;<script type="text/javascript">&ndash;&gt;-->
+    <!--&lt;!&ndash;//Call the method on pageload&ndash;&gt;-->
+    <!--&lt;!&ndash;$(window).on('load', function(){&ndash;&gt;-->
+      <!--&lt;!&ndash;//Disply the modal popup&ndash;&gt;-->
+      <!--&lt;!&ndash;$('#myModal').modal('show');&ndash;&gt;-->
+    <!--&lt;!&ndash;});&ndash;&gt;-->
+  <!--&lt;!&ndash;</script>&ndash;&gt;-->
+  <!--<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">-->
+    <!--<div class="modal-dialog">-->
+      <!--<div class="modal-content">-->
+        <!--<div class="modal-header">-->
+          <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+          <!--<h4 class="modal-title" id="myModalLabel">Modal title Here</h4>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+          <!--<ul>-->
+            <!---->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+          <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
   <div class="row">
     <div id="form" class="col-md-4 col-sm-12">
       <app-paccurate-request-form></app-paccurate-request-form>
@@ -13,5 +41,32 @@
     </div>
   </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li><strong>First;</strong> set the maximum weight of the box (Hint: It should be large)</li>
+          <li>Set the box name and dimensions</li>
+          <li>Feel Free to add another box and fill out the fields!</li></ul>
+        <ul><li><strong>Now</strong> it's time to add the items you want to fit in the box!</li>
+          <li>Set the weight, quantity and name of your items</li>
+          <li>Feel free to add another item</li>
+        <li> Press the "Pack" button to see some magic</li></ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <p-growl [(value)]="messages" [life]="5000" [immutable]="false"></p-growl>
+

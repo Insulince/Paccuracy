@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="request-form">
-  <div class="card my-2" formArrayName="boxTypes">
-    <div class="card-header">Boxes</div>
+  <div style="background-color: chocolate ;" class="card my-2" formArrayName="boxTypes">
+    <h2 style="text-align: center; border-color: aliceblue ">Boxes</h2>
     <div class="card-body">
       <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" type="button" (click)="addBoxType()">Add another box</button>
+        <button class="btn btn-warning btn-sm" type="button" (click)="addBoxType()">Add another box</button>
     </div>
   </div>
   <div class="card my-2" formArrayName="itemSets">
@@ -82,7 +82,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add another item</button>
+      <button class="btn btn-warning btn-sm" type="button" (click)="addItemSet()">Add another item</button>
     </div>
   </div>
   <button id="pack-button" type="submit" class="btn btn-success max-width" [disabled]="!form.valid">Pack</button>

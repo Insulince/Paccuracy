@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {GrowlService} from "./services/growl.service";
 import {Message} from "primeng/api";
 
@@ -9,12 +9,14 @@ import {Message} from "primeng/api";
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild('myModal') myModal:ElementRef;
   messages: Array<Message> = [];
 
   constructor(private growlService: GrowlService) {
   }
 
   ngOnInit(): void {
+    this.myModal.nativeElement.click();
     this.growlService.messageAdded.subscribe(
       (message: Message): void => {
         this.messages.push(message);
