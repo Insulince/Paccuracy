@@ -48,9 +48,9 @@ export class PaccurateResponseViewComponent implements OnInit {
         this.loading = false;
 
         this.growlService.add({
-          severity: response.lenLeftovers === 0 ? "success" : "error",
-          summary: response.lenLeftovers === 0 ? "Success" : "Failure",
-          detail: response.lenLeftovers === 0 ? "Packaging successful!" : "Packaging failed!"
+          severity: response.lenLeftovers === 0 ? "success" : "warn",
+          summary: response.lenLeftovers === 0 ? "Success" : "Success with leftovers",
+          detail: response.lenLeftovers === 0 ? "Packaging successful!" : "Packaging succeeded for most of your items, but some exceeded the maximum weight and/or maximum size."
         });
 
         return this.svgs.changes;
@@ -65,7 +65,7 @@ export class PaccurateResponseViewComponent implements OnInit {
             svg.nativeElement.innerHTML = svgsWithoutPolygons;
             const svgElement = svg.nativeElement.firstChild.firstChild;
             polygons.forEach(polygon => {
-              polygon = polygon.replace(/class='volume-line'/gi, `class='volume-line animated slideInDown'`);
+              polygon = polygon.replace(/class='volume-line'/gi, `class='volume-line animated bounceInDown'`);
               setTimeout(() => {
                 svgElement.insertAdjacentHTML("beforeend", polygon);
               }, 500);

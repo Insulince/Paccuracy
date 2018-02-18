@@ -217,6 +217,15 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     console.log("After View Init");
     console.log("Response", this.paccurateResponse);
+
+    this.boxGeometries = [];
+    this.boxMaterials = [];
+    this.boxCubes = [];
+    this.itemGeometries = [];
+    this.itemMaterials = [];
+    this.itemCubes = [];
+    this.currentlyFocusedBoxIndex = 0;
+
     this.createScene();
     this.createLight();
     this.createCamera();
@@ -249,9 +258,9 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
       this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
       this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
-
-      this.controls.update();
     }
+
+    this.controls.update();
   }
 
   lookAtNextBox(): void {
@@ -265,8 +274,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
       this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
       this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
-
-      this.controls.update();
     }
+
+    this.controls.update();
   }
 }
