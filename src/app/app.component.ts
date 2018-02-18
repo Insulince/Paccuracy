@@ -10,6 +10,7 @@ import {Message} from "primeng/api";
 
 export class AppComponent implements OnInit {
   messages: Array<Message> = [];
+  formToggled = true;
 
   constructor(private growlService: GrowlService) {
   }

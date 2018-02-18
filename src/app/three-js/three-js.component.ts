@@ -46,12 +46,19 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   private createScene() {
     this.scene = new THREE.Scene();
     // this.scene.add(new THREE.AxesHelper(200));
+
+    const spacingFactor = 10;
+
     this.paccurateResponse.boxes.forEach(
       (boxWrapper: BoxWrapper, i: number): void => {
         this.boxGeometries.push(new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y));
         this.boxMaterials.push(new THREE.MeshBasicMaterial({color: 666666, wireframe: true, wireframeLinewidth: 10}));
         this.boxCubes.push(new THREE.Mesh(this.boxGeometries[this.boxGeometries.length - 1], this.boxMaterials[this.boxMaterials.length - 1]));
-        this.boxCubes[this.boxCubes.length - 1].position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
+        this.boxCubes[this.boxCubes.length - 1].position.set(
+          boxWrapper.box.dimensions.z / 2 + this.boxCubes[this.boxCubes.length - 2 >= 0 ? this.boxCubes.length - 2 : 0].position.x + this.paccurateResponse.boxes[i - 1 >= 0 ? i - 1 : 0].box.dimensions.z / 2 + spacingFactor,
+          boxWrapper.box.dimensions.x / 2,
+          boxWrapper.box.dimensions.y / 2
+        );
         boxWrapper.box.items.forEach(
           (itemWrapper: ItemWrapper): void => {
             this.itemGeometries.push(new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y));
@@ -152,8 +159,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.controls.addEventListener("change", this.render);
 
     this.currentlyFocusedBoxIndex = 0;
-    const firstBox = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
-    this.controls.target = new THREE.Vector3(firstBox.z / 2, firstBox.x / 2, firstBox.y / 2);
+    const firstBox = this.boxCubes[this.currentlyFocusedBoxIndex].position;
+    this.controls.target = new THREE.Vector3(firstBox.x, firstBox.y, firstBox.z);
   }
 
   /* EVENTS */

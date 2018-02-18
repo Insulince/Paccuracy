@@ -68,7 +68,7 @@ export class PaccurateResponseViewComponent implements OnInit {
               polygon = polygon.replace(/class='volume-line'/gi, `class='volume-line animated bounceInDown'`);
               setTimeout(() => {
                 svgElement.insertAdjacentHTML("beforeend", polygon);
-              }, 500);
+              }, 800);
             });
           }
         );

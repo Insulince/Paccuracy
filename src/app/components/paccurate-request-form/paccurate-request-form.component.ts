@@ -51,14 +51,14 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
         z: []
       }),
       quantity: [],
-      name: []
+      name: [this.genName("itemSets")]
     });
   }
 
   private newBoxType(): FormGroup {
     return this.fB.group({
       weightMax: [],
-      name: [],
+      name: [this.genName("boxTypes")],
       dimensions: this.fB.group({
         x: [],
         y: [],
@@ -97,5 +97,9 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
 
   private genHex(): string {
     return "#" + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
+  }
+
+  private genName(controlName: string): string {
+    return `${controlName === "itemSets" ? "Item" : "Box"} ${this.form ? (<FormArray>this.form.get(controlName)).controls.length + 1 : 1}`;
   }
 }
