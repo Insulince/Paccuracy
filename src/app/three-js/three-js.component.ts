@@ -120,7 +120,7 @@ export class ThreeJsComponent implements AfterViewInit {
   }
 
   public addControls() {
-    this.controls = new THREE.OrbitControls(this.camera);
+    this.controls = new THREE.OrbitControls(this.camera, document.getElementById("three-canvas"));
     this.controls.rotateSpeed = 1.0;
     this.controls.zoomSpeed = 1.2;
     this.controls.addEventListener("change", this.render);
