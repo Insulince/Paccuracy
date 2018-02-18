@@ -1,15 +1,17 @@
 <div class="container-fluid">
   <div class="row">
-    <div id="brand" class="col-4 d-flex align-items-center">
+    <div class="col-4 d-flex align-items-center" id="close">
+      <p class="close-wrapper">
       <span class="left-align" (click)="onFormToggled($event)" style="font-size: 46px; cursor: pointer">
-        {{formToggled ? 'Close' : 'Pack'}}
-        <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
-      </span></div>
+        {{formToggled ? 'Close' : 'Pack'}} <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
+      </span>
+      </p>
+    </div>
     <div id="logo" class="col-4 d-flex justify-content-center">
       <img src="../assets/PBLOGO.png" class="brand-logo" width="225" height="135"/>
     </div>
     <div id="info" class="col-4 d-flex justify-content-end align-items-center">
-      <i class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px; float: right;"></i>
+      <i id="info-i" class="fa fa-info-circle" data-toggle="modal" data-target="#myModal" style="font-size:48px; float: right;"></i>
     </div>
   </div>
   <div class="row">
