@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {BaseForm} from "../../shared/BaseForm";
 import {PaccurateRequest, PaccurateResponse} from "../../model/model";
 import {PaccurateService} from "../../services/paccurate.service";
+import "rxjs/add/observable/merge";
 
 @Component({
   selector: "app-paccurate-request-form",
@@ -27,7 +28,6 @@ export class PaccurateRequestFormComponent extends BaseForm implements OnInit {
       itemSets: this.fB.array([this.newItemSet()]),
       boxTypes: this.fB.array([this.newBoxType()])
     });
-    this.exposeControls();
   }
 
   submit() {

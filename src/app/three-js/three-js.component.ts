@@ -5,7 +5,6 @@ import {BoxWrapper, ItemWrapper, PaccurateResponse} from "../model/model";
 import "three/examples/js/controls/OrbitControls";
 import "three/examples/js/loaders/ColladaLoader";
 import {PaccurateService} from "../services/paccurate.service";
-import {Color} from "three";
 
 @Component({
   selector: "app-three-js",
@@ -231,7 +230,6 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.paccurateService.paccurateResponseObs
       .subscribe((response: PaccurateResponse) => {
         this.paccurateResponse = response;
-        console.log(this.scene.children);
         while (this.scene.children.length > 0) {
           this.scene.remove(this.scene.children[0]);
         }
