@@ -14,13 +14,13 @@
           </div>
           <div class="form-row form-group" formGroupName="dimensions">
             <div class="col-4">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
+            </div>
+            <div class="col-4">
               <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
               <input type="number" formControlName="z" class="form-control" placeholder="Length">
-            </div>
-            <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
           </div>
           <div class="w-20">
@@ -59,13 +59,13 @@
           </div>
           <div class="form-row form-group" formGroupName="dimensions">
             <div class="col-4">
+              <input type="number" formControlName="x" class="form-control" placeholder="Height">
+            </div>
+            <div class="col-4">
               <input type="number" formControlName="y" class="form-control" placeholder="Width">
             </div>
             <div class="col-4">
               <input type="number" formControlName="z" class="form-control" placeholder="Length">
-            </div>
-            <div class="col-4">
-              <input type="number" formControlName="x" class="form-control" placeholder="Height">
             </div>
           </div>
           <div class="form-group">
@@ -74,6 +74,7 @@
           </div>
           <div class="w-20">
             <button class="btn btn-outline-danger btn-sm my-2" type="button"
+                    *ngIf="getItemSetsControls(form).length > 1;"
                     (click)="removeItemSet(i)">Remove
             </button>
           </div>
@@ -81,7 +82,7 @@
       </div>
     </div>
     <div class="card-footer">
-      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add item</button>
+      <button class="btn btn-primary btn-sm" type="button" (click)="addItemSet()">Add another item</button>
     </div>
   </div>
   <button id="pack-button" type="submit" class="btn btn-success max-width" [disabled]="!form.valid">Pack</button>
