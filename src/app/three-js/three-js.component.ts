@@ -40,18 +40,18 @@ export class ThreeJsComponent implements AfterViewInit {
     // this.scene.add(new THREE.AxesHelper(200));
 
     this.paccurateResponse.boxes.forEach(
-      (boxWrapper) => {
+      (boxWrapper, i) => {
         let geometry = new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y),
-          material = new THREE.MeshBasicMaterial({color: 666, wireframe: true});
+          material = new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10});
         let cube = new THREE.Mesh(geometry, material);
-        cube.position.set(boxWrapper.box.dimensions.z / 2, boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
+        cube.position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
         this.scene.add(cube);
         boxWrapper.box.items.forEach(
           (itemWrapper) => {
             let geometry = new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y),
-              material = new THREE.MeshBasicMaterial({color: itemWrapper.item.color, wireframe: true});
+              material = new THREE.MeshStandardMaterial({color: itemWrapper.item.color});
             let cube = new THREE.Mesh(geometry, material);
-            cube.position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2, itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
+            cube.position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((itemWrapper.item.origin.z + boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
             this.scene.add(cube);
           }
         );
