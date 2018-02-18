@@ -1,14 +1,17 @@
 <div class="container-fluid">
   <div class="row">
     <div id="brand" class="col-12">
-      <h1 class="center-align">Paccuracy</h1>
+      <span class="left-align" (click)="formToggled = !formToggled" style="font-size: 46px;">
+        <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
+      </span>
+      <h1 class="center-align" style="margin-top: -63px">Paccuracy</h1>
     </div>
   </div>
   <div class="row">
-    <div id="form" class="col-md-4 col-sm-12">
+    <div id="form" class="col-md-4 col-sm-12" [ngClass]="{'d-none': !formToggled}">
       <app-paccurate-request-form></app-paccurate-request-form>
     </div>
-    <div id="view" class="col-md-8 col-sm-12 stopOverflow">
+    <div id="view" class="col-sm-12 stopOverflow" [ngClass]="{'col-md-8 ': formToggled, 'col-md-12': !formToggled}">
       <app-paccurate-response-view></app-paccurate-response-view>
     </div>
   </div>
