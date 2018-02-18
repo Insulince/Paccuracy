@@ -30,7 +30,10 @@
           </ng-template>
           <ng-template pTemplate="body" let-response>
             <tr class="center-align">
-              <td>{{response.box}}</td>
+              <td>{{response.boxName}}
+                <br>
+                ({{response.boxDim}})
+              </td>
               <td>{{response.weightMax}}</td>
               <td>{{response.weightUsed}}</td>
               <td>{{response.weightRemaining}}</td>

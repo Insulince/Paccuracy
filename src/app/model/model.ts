@@ -151,7 +151,8 @@ export class Item {
 }
 
 export class PaccurateResponseDataTable {
-  public box?: string;
+  public boxName?: string;
+  public boxDim?: string;
   public volumeMax?: number;
   public volumeRemaining?: number;
   public volumeUsed?: number;
@@ -161,8 +162,9 @@ export class PaccurateResponseDataTable {
   public weightUsed?: number;
   public weightUtilization?: number;
 
-  constructor(box?: string, volumeMax?: number, volumeRemaining?: number, volumeUsed?: number, volumeUtilization?: number, weightMax?: number, weightRemaining?: number, weightUsed?: number, weightUtilization?: number) {
-    this.box = box;
+  constructor(boxName?: string, boxDim?: string, volumeMax?: number, volumeRemaining?: number, volumeUsed?: number, volumeUtilization?: number, weightMax?: number, weightRemaining?: number, weightUsed?: number, weightUtilization?: number) {
+    this.boxName = boxName;
+    this.boxDim = boxDim;
     this.volumeMax = volumeMax;
     this.volumeRemaining = volumeRemaining;
     this.volumeUsed = volumeUsed;
