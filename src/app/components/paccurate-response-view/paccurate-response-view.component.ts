@@ -86,7 +86,7 @@ export class PaccurateResponseViewComponent implements OnInit {
     response.boxes.forEach((boxWrapper: BoxWrapper, index: number) => {
       const responseData: PaccurateResponseDataTable = new PaccurateResponseDataTable();
       responseData.boxName = boxWrapper.box.name;
-      responseData.boxDim = `${boxWrapper.box.dimensions.x}x${boxWrapper.box.dimensions.y}x${boxWrapper.box.dimensions.z}`;
+      responseData.boxDim = `${boxWrapper.box.dimensions.z}x${boxWrapper.box.dimensions.y}x${boxWrapper.box.dimensions.x}`;
       responseData.volumeMax = boxWrapper.box.volumeMax;
       responseData.volumeRemaining = boxWrapper.box.volumeRemaining;
       responseData.volumeUsed = boxWrapper.box.volumeUsed;
