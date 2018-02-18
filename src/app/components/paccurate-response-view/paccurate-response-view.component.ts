@@ -17,6 +17,7 @@ export class PaccurateResponseViewComponent implements OnInit {
   public requestSubmitted: boolean;
   public paccurateResponseData: PaccurateResponseDataTable[] = [];
   public paccurateLeftOverData: PaccurateLeftOverDataTable[] = [];
+  public formToggled = true;
   private polygonRegex = /<polygon (.*?)>/gi;
 
   @ViewChildren("svgs") svgs: QueryList<ElementRef> = new QueryList<ElementRef>();
@@ -32,6 +33,12 @@ export class PaccurateResponseViewComponent implements OnInit {
     this.paccurateService.paccurateRequestSubmittedObs.subscribe(
       (): void => {
         this.requestSubmitted = true;
+      }
+    );
+
+    this.paccurateService.paccurateFormToggledObs.subscribe(
+      (data: boolean): void => {
+        this.formToggled = data;
       }
     );
 

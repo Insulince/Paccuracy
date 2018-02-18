@@ -76,7 +76,8 @@
       </p-panel>
     </div>
     <div class="row">
-      <div class="col-6 margin-top" *ngFor="let svg of paccurateResponse?.svgs; let i = index;">
+      <div class="margin-top" [ngClass]="{'col-6': formToggled, 'col-4': !formToggled}"
+           *ngFor="let svg of paccurateResponse?.svgs; let i = index;">
         <ng-container>
           <p class="svg-descriptor">Package {{i + 1}} ("{{paccurateResponse.boxes[i].box.name}}")</p>
           <div class="svgs-wrapper">
