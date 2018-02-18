@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="request-form">
   <div class="card my-2" formArrayName="boxTypes">
-    <div class="card-header">Boxes</div>
+    <div class="card-header">Boxes<span class="header-description">The things you'll put items into</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let boxType of getBoxTypesControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="card my-2" formArrayName="itemSets">
-    <div class="card-header">Items</div>
+    <div class="card-header">Items<span class="header-description">The things you'll put in the boxes</span></div>
     <div class="card-body">
       <div class="my-3" *ngFor="let itemSet of getItemSetsControls(form); let i = index;">
         <div class="card p-3" [formGroupName]="i">
@@ -47,16 +47,18 @@
           <!--<input type="number" id="refId" class="form-control" formControlName="refId">-->
           <!--</div>-->
           <div class="form-group">
-            <label for="itemName">Name</label>
+            <label for="itemName">Item Name</label>
             <input type="text" id="itemName" class="form-control" formControlName="name">
           </div>
-          <div class="form-group">
-            <label for="color">Color</label>
-            <p-colorPicker formControlName="color" id="color"></p-colorPicker>
-          </div>
-          <div class="form-group">
-            <label for="itemWeight">Weight</label>
-            <input type="number" id="itemWeight" class="form-control" formControlName="weight">
+          <div class="form-row">
+            <div class="col-3 form-group">
+              <label for="color">Color</label>
+              <p-colorPicker formControlName="color" id="color"></p-colorPicker>
+            </div>
+            <div class="col-9 form-group">
+              <!--<label for="itemWeight">Weight</label>-->
+              <input type="number" id="itemWeight" class="form-control" formControlName="weight" placeholder="Weight">
+            </div>
           </div>
           <div class="form-row form-group" formGroupName="dimensions" id="dimensions">
             <label class="col-md-12" for="dimensions">Dimensions</label>

@@ -13,6 +13,9 @@ export class PaccurateService {
   private paccurateRequestSubmittedSub: Subject<void> = new Subject<void>();
   paccurateRequestSubmittedObs = this.paccurateRequestSubmittedSub.asObservable();
 
+  private paccurateFormToggledSub: Subject<boolean> = new Subject<boolean>();
+  paccurateFormToggledObs = this.paccurateFormToggledSub.asObservable();
+
   constructor(private httpClient: HttpClient) {
   }
 
@@ -34,5 +37,9 @@ export class PaccurateService {
 
   emitPaccurateResponse(response: PaccurateResponse): void {
     this.paccurateResponseSub.next(response);
+  }
+
+  emitFormToggled(toggled: boolean): void {
+    this.paccurateFormToggledSub.next(toggled);
   }
 }

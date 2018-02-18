@@ -204,14 +204,23 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
 
   @HostListener("window:resize", ["$event"])
   public onResize(event: Event) {
-    this.canvas.style.width = "100%";
-    this.canvas.style.height = "100%";
-    console.log("onResize: " + this.canvas.clientWidth + ", " + this.canvas.clientHeight);
+    this.updateAspectRatio();
+  }
 
-    this.camera.aspect = this.getAspectRatio();
-    this.camera.updateProjectionMatrix();
-    this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
-    this.render();
+  updateAspectRatio(): void {
+    setTimeout(
+      (): void => {
+        this.canvas.style.width = "100%";
+        this.canvas.style.height = "100%";
+        console.log("onResize: " + this.canvas.clientWidth + ", " + this.canvas.clientHeight);
+
+        this.camera.aspect = this.getAspectRatio();
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(this.canvas.clientWidth, this.canvas.clientHeight);
+        this.render();
+      },
+      1
+    );
   }
 
   @HostListener("document:keypress", ["$event"])
@@ -242,15 +251,22 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.paccurateService.paccurateResponseObs
-      .subscribe((response: PaccurateResponse) => {
+    this.paccurateService.paccurateResponseObs.subscribe(
+      (response: PaccurateResponse): void => {
         this.paccurateResponse = response;
         while (this.scene.children.length > 0) {
           this.scene.remove(this.scene.children[0]);
         }
 
         this.ngAfterViewInit();
-      });
+      }
+    );
+
+    this.paccurateService.paccurateFormToggledObs.subscribe(
+      (toggled: boolean): void => {
+       this.updateAspectRatio();
+      }
+    );
   }
 
   lookAtPreviousBox(): void {
