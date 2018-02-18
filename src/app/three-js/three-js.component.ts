@@ -5,6 +5,7 @@ import {BoxWrapper, ItemWrapper, PaccurateResponse} from "../model/model";
 import "three/examples/js/controls/OrbitControls";
 import "three/examples/js/loaders/ColladaLoader";
 import {PaccurateService} from "../services/paccurate.service";
+import {Color} from "three";
 
 @Component({
   selector: "app-three-js",
@@ -50,7 +51,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.paccurateResponse.boxes.forEach(
       (boxWrapper: BoxWrapper, i: number): void => {
         this.boxGeometries.push(new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y));
-        this.boxMaterials.push(new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10}));
+        this.boxMaterials.push(new THREE.MeshBasicMaterial({color: 666666, wireframe: true, wireframeLinewidth: 10}));
         this.boxCubes.push(new THREE.Mesh(this.boxGeometries[this.boxGeometries.length - 1], this.boxMaterials[this.boxMaterials.length - 1]));
         this.boxCubes[this.boxCubes.length - 1].position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
         boxWrapper.box.items.forEach(
@@ -112,7 +113,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     const firstBoxDimensions = this.paccurateResponse.boxes[0].box.dimensions;
     this.camera.position.x = firstBoxDimensions.z / 2;
     this.camera.position.y = firstBoxDimensions.x / 2;
-    this.camera.position.z = firstBoxDimensions.y * firstBoxDimensions.z;
+    this.camera.position.z = firstBoxDimensions.y * firstBoxDimensions.z + 5;
 
     // X = Z, Y = X, Z = Y
   }
@@ -142,8 +143,6 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
   }
 
   public render() {
-    // this.itemCubes[0].material.opacity = 0.5; // or any other value you like
-    console.log("asdf");
     let self: ThreeJsComponent = this;
     self.renderer.render(this.scene, this.camera);
   }
@@ -251,7 +250,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
       this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
       this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
-      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
 
       this.controls.update();
     }
@@ -267,7 +266,7 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
       const currentBoxPositions = this.boxCubes[this.currentlyFocusedBoxIndex].position;
       this.camera.position.x = currentBoxDimensions.z / 2 + currentBoxPositions.x;
       this.camera.position.y = currentBoxDimensions.x / 2 + currentBoxPositions.y;
-      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z;
+      this.camera.position.z = currentBoxDimensions.y * currentBoxDimensions.z + currentBoxPositions.z + 5;
 
       this.controls.update();
     }
