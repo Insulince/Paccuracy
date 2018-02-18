@@ -37,7 +37,7 @@ export class ThreeJsComponent implements AfterViewInit {
 
   private createScene() {
     this.scene = new THREE.Scene();
-    this.scene.add(new THREE.AxesHelper(200));
+    // this.scene.add(new THREE.AxesHelper(200));
 
     this.paccurateResponse.boxes.forEach(
       (boxWrapper) => {
