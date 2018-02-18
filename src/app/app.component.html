@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <div class="row">
     <div id="brand" class="col-12">
-      <span class="left-align" (click)="formToggled = !formToggled" style="font-size: 46px;">
+      <span class="left-align" (click)="formToggled = !formToggled" style="font-size: 46px; cursor: pointer">
+        {{formToggled ? 'Close' : 'Pack'}}
         <i class="fa" [ngClass]="{'fa-chevron-right' : !formToggled, 'fa-chevron-left': formToggled}"></i>
       </span>
       <h1 class="center-align" style="margin-top: -63px">Paccuracy</h1>
