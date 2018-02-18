@@ -1,16 +1,17 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild, HostListener} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from "@angular/core";
 import * as THREE from "three";
 import "./js/EnableThreeExamples";
 import {PaccurateResponse} from "../model/model";
 import "three/examples/js/controls/OrbitControls";
 import "three/examples/js/loaders/ColladaLoader";
+import {PaccurateService} from "../services/paccurate.service";
 
 @Component({
   selector: "app-three-js",
   templateUrl: "./three-js.component.html",
   styleUrls: ["./three-js.component.scss"]
 })
-export class ThreeJsComponent implements AfterViewInit {
+export class ThreeJsComponent implements OnInit, AfterViewInit {
 
   private renderer: THREE.WebGLRenderer;
   private camera: THREE.PerspectiveCamera;
@@ -26,7 +27,7 @@ export class ThreeJsComponent implements AfterViewInit {
   @ViewChild("canvas")
   private canvasRef: ElementRef;
 
-  constructor() {
+  constructor(private paccurateService: PaccurateService) {
     this.render = this.render.bind(this);
     // this.onModelLoadingCompleted = this.onModelLoadingCompleted.bind(this);
   }
@@ -43,16 +44,16 @@ export class ThreeJsComponent implements AfterViewInit {
       (boxWrapper, i) => {
         let geometry = new THREE.BoxGeometry(boxWrapper.box.dimensions.z, boxWrapper.box.dimensions.x, boxWrapper.box.dimensions.y),
           material = new THREE.MeshBasicMaterial({color: 666, wireframe: true, wireframeLinewidth: 10});
-        let cube = new THREE.Mesh(geometry, material);
-        cube.position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
-        this.scene.add(cube);
+        let container = new THREE.Mesh(geometry, material);
+        container.position.set(boxWrapper.box.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), boxWrapper.box.dimensions.x / 2, boxWrapper.box.dimensions.y / 2);
+        this.scene.add(container);
         boxWrapper.box.items.forEach(
           (itemWrapper) => {
             let geometry = new THREE.BoxGeometry(itemWrapper.item.dimensions.z, itemWrapper.item.dimensions.x, itemWrapper.item.dimensions.y),
               material = new THREE.MeshStandardMaterial({color: itemWrapper.item.color});
-            let cube = new THREE.Mesh(geometry, material);
-            cube.position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((itemWrapper.item.origin.z + boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
-            this.scene.add(cube);
+            let box = new THREE.Mesh(geometry, material);
+            box.position.set(itemWrapper.item.origin.z + itemWrapper.item.dimensions.z / 2 + ((boxWrapper.box.dimensions.z) * i + (i * boxWrapper.box.dimensions.z)), itemWrapper.item.origin.x + itemWrapper.item.dimensions.x / 2, itemWrapper.item.origin.y + itemWrapper.item.dimensions.y / 2);
+            this.scene.add(box);
           }
         );
       }
@@ -185,11 +186,26 @@ export class ThreeJsComponent implements AfterViewInit {
 
   /* LIFECYCLE */
   ngAfterViewInit() {
+    console.log("After View Init");
+    console.log("Response", this.paccurateResponse);
     this.createScene();
     this.createLight();
     this.createCamera();
     this.startRendering();
     this.addControls();
+  }
+
+  ngOnInit() {
+    this.paccurateService.paccurateResponseObs
+      .subscribe((response: PaccurateResponse) => {
+        this.paccurateResponse = response;
+        console.log(this.scene.children);
+        while (this.scene.children.length > 0) {
+          this.scene.remove(this.scene.children[0]);
+        }
+
+        this.ngAfterViewInit();
+      });
   }
 
 }
