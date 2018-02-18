@@ -159,8 +159,8 @@ export class ThreeJsComponent implements OnInit, AfterViewInit {
     this.controls.addEventListener("change", this.render);
 
     this.currentlyFocusedBoxIndex = 0;
-    const firstBox = this.paccurateResponse.boxes[this.currentlyFocusedBoxIndex].box.dimensions;
-    this.controls.target = new THREE.Vector3(firstBox.z / 2, firstBox.x / 2, firstBox.y / 2);
+    const firstBox = this.boxCubes[this.currentlyFocusedBoxIndex].position;
+    this.controls.target = new THREE.Vector3(firstBox.x, firstBox.y, firstBox.z);
   }
 
   /* EVENTS */
